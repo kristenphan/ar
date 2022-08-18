@@ -1,13 +1,6 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\archive",
-    "\\assets",
-    "\\assets\\models",
-    "\\assets\\models\\trump",
-    "\\cube",
-    "\\make-lsrun-great-again"
+    ""
   ],
-  "SelectedNode": "\\make-lsrun-great-again\\index.html",
-  "PreviewInSolutionExplorer": false
+  "PreviewInSolutionExplorer": true
 }
