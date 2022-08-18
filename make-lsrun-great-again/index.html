@@ -10,9 +10,10 @@
 <body style="margin : 0px; overflow: hidden;">
     <a-scene embedded arjs>
         <a-marker preset="hiro">
+            <!--gltf model url with the same domain to avoid CORS issue-->
             <a-entity position="0 0 0"
                       scale="0.6 0.6 0.6"
-                      gltf-model="https://kristenphan.github.io/assets/models/trump/scene.gltf"
+                      gltf-model="https://kristenphan.github.io/assets/models/trump/scene.gltf" 
                       animation-mixer>
             </a-entity>
             <!--<a-entity 
@@ -27,13 +28,13 @@
                 text=
                     "color: gold; 
                     align: center; 
-                    width: 2; 
-                    font: https://cdn.aframe.io/fonts/Aileron-Semibold.fnt;
+                    width: 3; 
+                    font: https://kristenphan.github.io/assets/fonts/Oredo-Regular.ttf;
                     value: !Make LS Run Great Again!"
                 look-at="[camera]">
             </a-entity>
             <a-entity
-                position="0 1.5 0"
+                position="0 1.8 0"
                 text=
                     "color: gold; 
                     align: center; 
