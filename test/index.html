@@ -1,23 +1,18 @@
-<!DOCTYPE html>
 <html>
-<head>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!-- we import arjs version without NFT but with marker + location based support -->
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin : 0px; overflow: hidden;">
-    <a-scene embedded arjs>
-        <a-marker preset="hiro">
-            <a-text 
-                value="He llo"
-                font="https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json"
-                color="black"
-                negate="false"
-                scale="5 5 5"
-                position="-2 2 -4">
-            </a-text>
-        </a-marker>
-        <a-entity camera></a-entity>
+  <head>
+    <!--<meta charset="UTF-8">-->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene background="color: gold">
+      <a-text 
+        value="!Make Ls Run Great Again!"
+        font="https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json"
+        color="black"
+        negate="false"
+        scale="5 5 5"
+        position="-2 2 -4">
+      </a-text>
     </a-scene>
-</body>
+  </body>
 </html>
