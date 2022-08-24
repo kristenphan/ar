@@ -18,15 +18,17 @@
                       gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
                       animation-mixer>
             </a-entity>
-            <!-- Adding header text with msdf font; no look-at -->
-            <a-text 
-                value="!Make Ls Run Great Again!"
-                font="https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json"
-                color="black"
-                negate="false"
-                position="0 2.4 0"
-                scale="0.15 0.15 0.15">
-            </a-text>
+            <!-- Adding header text with custom msdf font with look-at -->
+            <a-entity
+                position="0 2.1 0"
+                text=
+                    "color: black; 
+                    align: center; 
+                    width: 3; 
+                    font: https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json;
+                    value: !Make LS Run Great Again!"
+                look-at="[camera]">
+            </a-entity>
             <!-- Adding body text with look-at-->
             <a-entity
                 position="0 1.8 0"
