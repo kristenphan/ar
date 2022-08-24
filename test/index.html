@@ -26,7 +26,7 @@
                 position="0 2.4 0"
                 text=
                     "color: black; 
-                    align: center; 
+                    align: left; 
                     width: 3; 
                     font: https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json;
                     value: !Make Ls Run Great Again!"
@@ -37,14 +37,14 @@
                 position="0 2 0"
                 text=
                     "color: black; 
-                    align: center; 
+                    align: left; 
                     width: 2; 
                     font: exo2semibold;
                     value: What: Weekly 4 km runs\nWhen: Fridays @ 12 PM \nWhere: Edge office"
                 look-at="[camera]">
             </a-entity>
             <!-- adding temperature panel using open weather api and look-at-->
-            <a-entity class="green panel" htmlembed="ppu: 256" position="0 2.5 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
+            <a-entity class="panel" htmlembed="ppu: 256" position="-2 1.5 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
                 <!-- hardcoding img src -->
                 <img src="http://openweathermap.org/img/wn/03d@2x.png" alt="image">
 		        <!-- displaying location -->
