@@ -29,7 +29,7 @@ window.addEventListener('load', () => {
      
                     // Converting Epoch(Unix) time to GMT
                     loc.textContent = `${place}`;
-                    tempC.textContent = `${temp.toFixed(0)}°C`;
+                    tempC.textContent = `${temp.toFixed(0)}` + '\xB0';
 
                 });
         });
