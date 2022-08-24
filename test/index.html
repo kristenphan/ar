@@ -1,18 +1,45 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <!--<meta charset="UTF-8">-->
-    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene background="color: gold">
-      <a-text 
-        value="!Make Ls Run Great Again!"
-        font="https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json"
-        color="black"
-        negate="false"
-        scale="5 5 5"
-        position="-2 2 -4">
-      </a-text>
+<head>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <!--aframe-extra for a-frame animation-mixer-->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <!--aframe-look-at-component to tell an entity to face towards another entity or position-->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+</head>
+<body style="margin : 0px; overflow: hidden;">
+    <a-scene embedded arjs>
+        <a-marker preset="hiro">
+            <!--Adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
+            <a-entity position="0 0 0"
+                      scale="0.6 0.6 0.6"
+                      gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
+                      animation-mixer>
+            </a-entity>
+            <!-- Adding header text with msdf font; no look-at -->
+            <a-text 
+                value="!Make Ls Run Great Again!"
+                font="https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json"
+                color="black"
+                negate="false"
+                scale="5 5 5"
+                position="0 2.1 0">
+            </a-text>
+            <!-- Adding body text with look-at-->
+            <a-entity
+                position="0 1.8 0"
+                text=
+                    "color: gold; 
+                    align: center; 
+                    width: 2; 
+                    font: kelsonsans;
+                    value: What: Weekly 4 km runs\nWhen: Fridays @ 12 PM \nWhere: Edge office"
+                look-at="[camera]">
+            </a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
-  </body>
+</body>
 </html>
