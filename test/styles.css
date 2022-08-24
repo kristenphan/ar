@@ -1,9 +1,9 @@
-.dark{
+.green{
       background-image: linear-gradient(#063e77, #6ecbe0);
       border-radius:15px;  
       padding: 10px;
     }
-.menu{
+.panel{
       width: 200px;
       height: 200px;
       text-align: center;
