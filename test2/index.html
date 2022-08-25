@@ -2,32 +2,33 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- loading mindAR.js and a-frame library for image tracking and AR rendering -->
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
-    <!-- importing aframe-extra for a-frame animation-mixer-->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <!-- importing aframe-look-at-component to tell an entity to face towards another entity or position-->
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: ./targets.mind; showStats: true;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <img id="card" src="https://kristenphan.github.io/ar/assets/markers/ls.mind" />
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-        <a-gltf-model 
-            rotation="0 0 0 " 
-            position="0 0 0.1" 
-            scale="0.005 0.005 0.005" 
-            src="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
-            animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
-      </a-entity>
+    <a-scene 
+      mindar-image="imageTargetSrc: https://kristenphan.github.io/ar/assets/markers/ls.mind;" 
+      vr-mode-ui="enabled: false" 
+      device-orientation-permission-ui="enabled: false">
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+        <a-entity mindar-image-target="targetIndex: 0">
+          <!-- <a-plane color="blue" opaciy="0.5" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane> -->
+          <!-- Superimposing a 3D box on the detected marker --> 
+          <!--<a-box
+            position="0 0.8 0"
+            material="color: yellow;"
+            depth="0.5" 
+            height="0.5" 
+            width="0.5">
+          </a-box> -->
+          <!--adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
+          <a-entity position="0 0 0"
+                    scale="0.6 0.6 0.6"
+                    gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
+                    animation-mixer>
+          </a-entity>
+        </a-entity>
     </a-scene>
   </body>
 </html>
