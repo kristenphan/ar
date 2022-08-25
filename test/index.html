@@ -19,21 +19,19 @@
         <a-marker preset="hiro">
             <!-- adding temperature panel using open weather api and look-at-->
             <a-entity htmlembed="ppu: 256" position="0 0 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
-                <article class="widget">
-                    <div class="weatherIcon"><i class="wi wi-day-cloudy"></i></div>
-                    <div class="weatherInfo">
-                        <div class="temperature"><span>25&deg;</span></div>
-                        <div class="description">    
-                            <div class="weatherCondition">CLOUDY</div>    
-                            <div class="place">New York, New York</div>
-                        </div>
-                    </div>
-                    <div class="date">1st Jan</div>
-                </article>
+                <div class="widget">
+                  <div class="left-panel panel">
+                    <div class="date"> Monday, 20 Aug 2018 </div>
+                    <div class="city"> Mumbai </div>
+                    <div class="temp"> <img src="https://codefrog.tech/cp/wp/ts.png" alt="" width="60"> 27&deg; </div>
+                  </div>
+                  <div class="right-panel panel"> 
+                      <img src="https://codefrog.tech/cp/wp/mumbai.png" alt="" width="160">
+                  </div>
+                </div>   
             </a-entity>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-    <script src="scripts.js"></script>
 </body>
 </html>
