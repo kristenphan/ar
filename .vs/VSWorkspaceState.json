@@ -4,11 +4,10 @@
     "\\assets",
     "\\assets\\fonts",
     "\\assets\\fonts\\oredo-regular-msdf",
-    "\\cat-markerless",
-    "\\make-lsrun-great-again",
-    "\\test",
-    "\\trump-markerless"
+    "\\assets\\markers",
+    "\\pittt-img-tracking",
+    "\\test"
   ],
-  "SelectedNode": "\\make-lsrun-great-again\\index.html",
+  "SelectedNode": "\\test\\index.html",
   "PreviewInSolutionExplorer": true
 }
