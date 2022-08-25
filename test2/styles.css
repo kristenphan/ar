@@ -1,16 +1,16 @@
-#tempC {
+.tempC {
   font-size: 60px;
   font-weight: bold;
-  color: white;
+  color: black;
 }
 
-#location {
-  color: white;
+.location {
+  color: black;
 }
 
-.panel {
+.widget {
     background-color: #fcfdfd;
-    width: 400px;
+    width: 420px;
     height: 120px;
     text-align: center;
     border-radius: 9px;
