@@ -1,41 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- importing a-frame for AR rendering -->
-	<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!-- importing arjs version without NFT but with marker + location based support -->
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- we import arjs version without NFT but with marker + location based support -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-    <!-- importing aframe-extra for animating AR content using animation-mixer-->
+    <!--aframe-extra for a-frame animation-mixer-->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <!-- importing aframe-look-at-component to tell an entity to face towards another entity or position-->
+    <!--aframe-look-at-component to tell an entity to face towards another entity or position-->
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
-    <!-- importing html-embed-component to add html elements to a-scene -->
-    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
-	<link rel="stylesheet" href="styles.css" />
 </head>
-<body>
+<body style="margin : 0px; overflow: hidden;">
     <a-scene embedded arjs>
         <a-marker preset="hiro">
-            <!--adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
+            <!--Adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
             <a-entity position="0 0 0"
-                      scale="0.5 0.5 0.5"
+                      scale="0.6 0.6 0.6"
                       gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
                       animation-mixer>
             </a-entity>
-            <!-- adding header text with custom msdf font with look-at -->
+            <!-- Adding header text with custom msdf font with look-at -->
             <a-entity
-                position="0 2.4 0"
+                position="0 2.2 0"
                 text=
                     "color: black; 
                     align: center; 
                     width: 3; 
                     font: https://kristenphan.github.io/ar/assets/fonts/oredo-regular-msdf/oredo-regular-msdf.json;
-                    value: !Make Ls Run Great Again!"
+                    value: !Make LS Run Great Again!"
                 look-at="[camera]">
             </a-entity>
-            <!-- adding body text with look-at-->
+            <!-- Adding body text with look-at-->
             <a-entity
-                position="0 2 0"
+                position="0 1.8 0"
                 text=
                     "color: black; 
                     align: center; 
@@ -44,11 +40,8 @@
                     value: What: Weekly 4 km runs\nWhen: Fridays @ 12 PM \nWhere: Edge office"
                 look-at="[camera]">
             </a-entity>
-            <!-- adding temperature panel using open weather api and look-at-->
-            <!--<a-entity class="panel" htmlembed="ppu: 256" position="0 2.6 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
-                <div id="location"> Loc blue? </div>
-                <div id="tempC"> Tem blue? </div>
-            </a-entity> -->
+        </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
-	<!--<script src="scripts.js"></script>-->
 </body>
+</html>

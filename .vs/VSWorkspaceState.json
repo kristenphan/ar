@@ -2,12 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\fonts",
-    "\\assets\\fonts\\oredo-regular-msdf",
     "\\assets\\markers",
-    "\\pittt-img-tracking",
-    "\\test"
+    "\\cube-ls",
+    "\\cube2",
+    "\\ls-run-img",
+    "\\make-lsrun-great-again",
+    "\\test",
+    "\\test2"
   ],
-  "SelectedNode": "\\test\\index.html",
+  "SelectedNode": "\\make-lsrun-great-again\\index.html",
   "PreviewInSolutionExplorer": true
 }
