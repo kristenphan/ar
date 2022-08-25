@@ -5,6 +5,8 @@
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <!-- importing aframe-extra for a-frame animation-mixer-->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
   </head>
   <body>
     <a-scene 
@@ -25,6 +27,7 @@
           <!--adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
           <a-entity position="0 0 0"
                     scale="0.6 0.6 0.6"
+                    rotation="0 0 90"
                     gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
                     animation-mixer>
           </a-entity>
