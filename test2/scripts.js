@@ -5,7 +5,7 @@ const api = "1e5664d4684fd1be5667d4ec7583c068";
 const loc = document.getElementById('location');
 const tempC = document.getElementById('tempC');
 
-// Using an event listener to run a function every time the page is loaded
+// Using an event listener to fetch current weather data every time the page is loaded
 window.addEventListener('load', () => {
     let long;
     let lat;
@@ -30,8 +30,6 @@ window.addEventListener('load', () => {
                     // Converting Epoch(Unix) time to GMT
                     loc.textContent = `${place}`;
                     tempC.textContent = `${temp.toFixed(0)}\xB0`;
-
-                    window.alert("location = " + `${place}` + "; temp = " + `${temp.toFixed(0)}\xB0`);
                 });
         });
     }
