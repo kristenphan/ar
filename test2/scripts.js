@@ -4,6 +4,7 @@ const api = "1e5664d4684fd1be5667d4ec7583c068";
 // Accessing DOM elements
 const loc = document.querySelector('.location');
 const tempC = document.querySelector('.tempC');
+const date = document.querySelector('.date');
 
 // Using an event listener to fetch current weather data every time the page is loaded
 window.addEventListener('load', () => {
@@ -24,12 +25,18 @@ window.addEventListener('load', () => {
                     return response.json(); // Translating the response into a JSON object
                 })
                 .then((data) => {
+                    // extracting location + temp data from json response
                     const place = data.name;
-                    const { temp } = data.main; // Storing temperature data by matching data field "temp" from data.main
-     
-                    // Converting Epoch(Unix) time to GMT
+                    const { temp } = data.main; 
+                    
+                    // calculating today()
+                    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                    var today  = new Date();
+
+                    // updating html elements
                     loc.textContent = `${place}`;
                     tempC.textContent = `${temp.toFixed(0)}\xB0`;
+                    date.textContent = today.toLocaleDateString("en-US", options);
                 });
         });
     }
