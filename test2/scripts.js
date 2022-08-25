@@ -31,6 +31,7 @@ window.addEventListener('load', () => {
                     loc.textContent = `${place}`;
                     tempC.textContent = `${temp.toFixed(0)}\xB0`;
 
+                    window.alert("location = " + `${place}` + "; temp = " + `${temp.toFixed(0)}\xB0`);
                 });
         });
     }
