@@ -18,7 +18,7 @@
         <a-marker preset="hiro">
             <!--adding .gltf 3D model with animation and url with same domain to avoid CORS issue-->
             <a-entity position="0 0 0"
-                      scale="0.6 0.6 0.6"
+                      scale="0.5 0.5 0.5"
                       gltf-model="https://kristenphan.github.io/ar/assets/models/trump/scene.gltf" 
                       animation-mixer>
             </a-entity>
@@ -45,12 +45,12 @@
                 look-at="[camera]">
             </a-entity>
             <!-- adding temperature panel using open weather api and look-at-->
-            <a-entity class="panel" htmlembed="ppu: 256" position="0 2.5 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
+            <a-entity class="panel" htmlembed="ppu: 256" position="0 2.6 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
                 <!-- displaying location -->
                 <div id="location"> Loc blue? </div>
                 <!-- displaying celcius temp -->
                 <div id="tempC"> Tem blue? </div>
             </a-entity>
     </a-scene>
-	<!-- <script src="scripts.js"></script> -->
+	<script src="scripts.js"></script>
 </body>
