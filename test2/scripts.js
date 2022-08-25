@@ -2,8 +2,8 @@
 const api = "1e5664d4684fd1be5667d4ec7583c068";
 
 // Accessing DOM elements
-const loc = document.getElementById('location');
-const tempC = document.getElementById('tempC');
+const loc = document.querySelector('.location');
+const tempC = document.querySelector('.tempC');
 
 // Using an event listener to fetch current weather data every time the page is loaded
 window.addEventListener('load', () => {
