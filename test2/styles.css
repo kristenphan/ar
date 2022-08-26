@@ -1,3 +1,7 @@
+body {
+   font-family: 'Roboto', sans-serif;
+}
+
 div.date {
   color: black;
   opacity: 0.5;
@@ -15,6 +19,7 @@ div.location {
 /*  no difference when trying font-weight: thin */
 div.tempC {
   font-size: 61px;
+  font-weight: thin;
   color: black;
   opacity: 0.9;
 }
@@ -37,10 +42,14 @@ div.icontemp {
   align-items: center;
 }
 
+div.left-panel {
+    padding-left: 20px;
+}
+
 div.right-panel {
   position: absolute;
   float: left;
   top: 0;
   margin-top: 35px;
-  padding-left: 90px;
+  padding-left: 200px;
 }
