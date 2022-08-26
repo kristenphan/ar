@@ -15,7 +15,6 @@ div.location {
 /*  no difference when trying font-weight: thin */
 div.tempC {
   font-size: 61px;
-  font-weight: thin;
   color: black;
   opacity: 0.9;
 }
@@ -34,6 +33,7 @@ div.widget {
 
 div.panel {
   display: inline-block;
+  opacity: 1;
 }
 
 div.left-panel {
