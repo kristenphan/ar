@@ -2,14 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\markers",
-    "\\cube-ls",
-    "\\cube2",
-    "\\ls-run-img",
-    "\\make-lsrun-great-again",
-    "\\test",
+    "\\assets\\images",
     "\\test2"
   ],
-  "SelectedNode": "\\make-lsrun-great-again\\index.html",
+  "SelectedNode": "\\test2\\styles.css",
   "PreviewInSolutionExplorer": true
 }
