@@ -1,7 +1,3 @@
-body {
-   font-family: 'Roboto', sans-serif;
-}
-
 div.date {
   color: black;
   opacity: 0.5;
@@ -24,7 +20,7 @@ div.tempC {
   opacity: 0.9;
 }
 
-.widget {
+div.widget {
     background-color: #fcfdfd;
     width: 440px;
     height: 120px;
@@ -37,19 +33,23 @@ div.panel {
   display: inline-block;
 }
 
-div.icontemp {
-  display: flex;
-  align-items: center;
-}
-
 div.left-panel {
     padding-left: 20px;
 }
 
 div.right-panel {
-  position: absolute;
-  float: left;
-  top: 0;
-  margin-top: 35px;
-  padding-left: 200px;
+    position: absolute;
+    float: left;
+    top: 0;
+    margin-top: 35px;
+    padding-left: 150px;
+}
+
+div.icontemp {
+    display: flex;
+    align-items: center;
+}
+
+div.tempC {
+    padding-left: 20px;
 }
