@@ -12,14 +12,11 @@ div.location {
   padding-top: 5px;
 }
 
+/*  no difference when trying font-weight: thin */
 div.tempC {
-  font-size: 21px;
+  font-size: 61px;
   color: black;
   opacity: 0.9;
-}
-
-#thin {
-    font-weight: thin;
 }
 
 .widget {
@@ -33,6 +30,11 @@ div.tempC {
 
 div.panel {
   display: inline-block;
+}
+
+div.icontemp {
+  display: flex;
+  align-items: center;
 }
 
 div.right-panel {
