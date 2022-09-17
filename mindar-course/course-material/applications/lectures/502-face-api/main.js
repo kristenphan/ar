@@ -17,10 +17,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const {renderer, scene, camera} = mindarThree;
     const textures = {};
-    textures['happy'] = await loadTexture('../../assets/openmoji/1F600');
-    textures['angry'] = await loadTexture('../../assets/openmoji/1F621');
-    textures['sad'] = await loadTexture('../../assets/openmoji/1F625');
-    textures['neutral'] = await loadTexture('../../assets/openmoji/1F610');
+    textures['happy'] = await loadTexture('../../assets/openmoji/1F600.png');
+    textures['angry'] = await loadTexture('../../assets/openmoji/1F621.png');
+    textures['sad'] = await loadTexture('../../assets/openmoji/1F625.png');
+    textures['neutral'] = await loadTexture('../../assets/openmoji/1F610.png');
 
     const geometry = new THREE.PlaneGeometry(1, 1);
     const material = new THREE.MeshBasicMaterial({map: textures['neutral']});
