@@ -1,14 +1,13 @@
-import {loadGLTF} from "../../libs/loader.js";
-const THREE = window.MINDAR.IMAGE.THREE;
+import {loadGLTF} from "../../libs/loader.js"; // helper fx to load GLTF
+const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
 // Load .js code after html doc is loaded
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
-    // Instantiate mindarThree object with the compiled image target .mind
-    // mindarThre auto instantiates renderer, scene, and camera
+    // Instantiate mindarThree object which in turn auto instantiates three.js renderer, scene, and camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/robot.mind',
+      container: document.body, // size of renderer <canvas>
+      imageTargetSrc: '../../assets/targets/robot.mind', // compiled image target
     });
     const {renderer, scene, camera} = mindarThree;
 
@@ -114,6 +113,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cameraStream = mindarThree.video;
     // Detect hand in camera stream. Estimate gestures of detected hand. Play actions accordingly
     let skipCount = 0;
+    // Create detect() to recursively call window.requestAnimationFrame(detect) 
+    // to detect hand gestures and play corresponding animations
     const detect = async () => {
       // If the current action is not idleAction, skip trying to detect hands
       // so that the current action can play out in its entirety
@@ -135,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
       // If hand is detected, estimate the gesture using the first hand detected idx=0
       // using threshold of 7.5 
       if (predictions.length > 0) {
-        // Estimate the gestures of the detected hand with threshold of 7.5 (10=highest)
+        // Estimate the gestures of the detected hand with threshold of 7.5 
+        // 10 = highest confidence for an estimated gesture
         const estimatedGestures = GE.estimate(predictions[0].landmarks, 7.5)
         // Find the best gesture based on estimated score
         if (estimatedGestures.gestures.length > 0) {

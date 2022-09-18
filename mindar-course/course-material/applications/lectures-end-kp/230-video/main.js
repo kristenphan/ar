@@ -1,23 +1,23 @@
-import {loadGLTF, loadVideo} from "../../libs/loader.js";
-const THREE = window.MINDAR.IMAGE.THREE;
+import {loadGLTF, loadVideo} from "../../libs/loader.js"; // helper fx to load GLTF and audio
+const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
+// Load .js code after html doc has loaded
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
-    // Instantiate mindarThree object which in turn auto instantiates renderer, scene, camera
+    // Instantiate mindarThree object which in turn auto instantiates three.js renderer, scene, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/sintel.mind',
+      container: document.body, // size of renderer canvas
+      imageTargetSrc: '../../assets/targets/sintel.mind', // compiled image target
     });
     const {renderer, scene, camera} = mindarThree;
 
     // Load video and create texture from the video
-    const video = await loadVideo('../../assets/videos/sintel/sintel.mp4');
+    const video = await loadVideo('../../assets/videos/sintel/sintel.mp4'); // returns html <video>
     const texture = new THREE.VideoTexture(video);
 
-    // Create a plane (1, 240/480) to make the video perfectly overlaps
-    // the plane without overflow
-    // 1 means plane width = image target width
-    // 240/480 bc the ratio of the video is 480x240
+    // Create a plane (1, 240/480) to make the video perfectly overlaps the plane without overflow
+    // "1" means plane width = image target width
+    // "240/480" bc the ratio of the video is 480x240
     const geometry = new THREE.PlaneGeometry(1, 240/480);
     const material = new THREE.MeshBasicMaterial({
         map: texture,
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const plane = new THREE.Mesh(geometry, material);
 
-    // Create an anchor and add plane to anchor
+    // Create a MindAR anchor using an image target idx=0 and add plane to anchor
     const anchor = mindarThree.addAnchor(0);
     anchor.group.add(plane);
 

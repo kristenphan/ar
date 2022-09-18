@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Instantiate mindarThree object which in turn auto instantiates renderer, scene, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/musicband.mind',
-      maxTrack: 2,
+      container: document.body, // size of the renderer canvas object
+      imageTargetSrc: '../../assets/targets/musicband.mind', // compiled target image
+      maxTrack: 2, // number of image targets being tracked
     });
     const {renderer, scene, camera} = mindarThree;
 
@@ -29,10 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
     bear.scene.scale.set(0.1, 0.1, 0.1);
     bear.scene.position.set(0, -0.4, 0);
 
-    // Add models to their respective anchors
+    // Add models to their respective anchors before starting mindar engine
     const raccoonAnchor = mindarThree.addAnchor(0);
     raccoonAnchor.group.add(raccoon.scene);
-
     const bearAnchor = mindarThree.addAnchor(1);
     bearAnchor.group.add(bear.scene);
 

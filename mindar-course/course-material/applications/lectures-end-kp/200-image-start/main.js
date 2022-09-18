@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Once the AR engine has started, 
 	// this callback function will be executed for every video frame
 	renderer.setAnimationLoop(() => {
-	  // Render <canvas> element
+	  // Render <canvas> element as when renderer is created, <canvas> is auto created
 	  renderer.render(scene, camera);
 	});
   };

@@ -3,7 +3,6 @@ import {mockWithVideo, mockWithImage} from '../../libs/camera-mock.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
-
     // Create a mock webcam instead of starting the webcam for testing 
     mockWithVideo('../../assets/mock-videos/course-banner1.mp4');
 
@@ -24,9 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const anchor = mindarThree.addAnchor(0);
     anchor.group.add(plane);
-
-    await mindarThree.start();
-    renderer.setAnimationLoop(() => {
+    
+    await mindarThree.start(); // Start mindAR engine
+    renderer.setAnimationLoop(() => { // Once mindAR engine's started, this callback fx will be executed for every video frame
       renderer.render(scene, camera);
     });
   }

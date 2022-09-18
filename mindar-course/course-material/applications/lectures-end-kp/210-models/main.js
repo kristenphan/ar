@@ -2,10 +2,10 @@
 import {mockWithVideo, mockWithImage} from '../../libs/camera-mock.js';
 // Import a GLTF loader helper function which makes use of GLTFLoader.js
 import {loadGLTF} from '../../libs/loader.js';
-
+// three.js is a dependency of mindar-image-three.prod.js
 const THREE = window.MINDAR.IMAGE.THREE;
 
-// CAN'T ACCESS IDX=1
+// Load .js after html doc has loaded 
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
     // Create a mock image for testing 
@@ -30,16 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // All AR contents part of this anchor will inherit the position + rotation of the anchor
     const anchor = mindarThree.addAnchor(0);
 
-    const gltf = await loadGLTF('../../assets/models/musicband-raccoon/scene.gltf');
-    // gltf.scene is a THREE.GROUP element
+    // Load gltf model. Need to load all models before starting MindAR engine: mindarThree.start()
+    // gltf.scene is a THREE.GROUP element itself containing smaller objects which make up .gltf model as a whole
     // These scaling and position measures are decided by trial n error
+    const gltf = await loadGLTF('../../assets/models/musicband-raccoon/scene.gltf');
     gltf.scene.scale.set(0.1, 0.1, 0.1); 
     gltf.scene.position.set(0, -0.4, 0);
     // Add gltf.scene to anchor 
     anchor.group.add(gltf.scene);
 
-    // Start MindAR engine: start tracking image target and re-render objects for each video frame
-    // Need to load all models before starting MindAR engine
+    // Start MindAR engine
+    // Once MindAR engine's started, execute the callback function for every video frame to render AR scene
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);

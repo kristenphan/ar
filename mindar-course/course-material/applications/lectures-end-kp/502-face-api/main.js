@@ -1,7 +1,9 @@
-import * as faceapi from '../../libs/faceapi/face-api.esm.js';
+import * as faceapi from '../../libs/faceapi/face-api.esm.js'; // import faceapi
+ // helper fx to load image as texture for material creation in THREE.MeshBasicMaterial()
 import {loadTexture} from '../../libs/loader.js';
-const THREE = window.MINDAR.FACE.THREE;
+const THREE = window.MINDAR.FACE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
+// Load .js code after html doc has loaded
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
     // Load face api mode and build required assets
@@ -15,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     await faceapi.nets.faceLandmark68Net.load(modelPath);
     await faceapi.nets.faceExpressionNet.load(modelPath);
 
-    // Initialize MindAR 
+    // Initialize mindarThree object which in turn auto instantiates three.js renderer, scene, camera
     const mindarThree = new window.MINDAR.FACE.MindARThree({
-      container: document.body
+      container: document.body // size of renderer <canvas>
     });
     const {renderer, scene, camera} = mindarThree;
 
@@ -51,7 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const expressions = ['happy', 'angry', 'sad', 'neutral'];
     let lastExpression = 'neutral';
 
-    // Create detect() to detect face expressions using faceapi
+    // Create detect() to recursively call window.requestAnimationFrame(detect), 
+    // detect face expressions using faceapi and render corresponding emojis on planes
     const detect = async () => {
       const results = await faceapi.detectSingleFace(cameraStream, optionsTinyFace)
                                     .withFaceLandmarks()
@@ -60,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (results && results.expressions) {
         let newExpression = 'neutral';
         for (let i = 0; i < expressions.length; i++) {
-          if (results.expressions[expressions[i]] > 0.5) {
+          if (results.expressions[expressions[i]] > 0.5) { // confidence>0.5
             newExpression = expressions[i];
           };
         };

@@ -1,6 +1,7 @@
+// Explicitly import CSS3DObject as it's not part of three.js core api
 import { CSS3DObject } from '../../libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js';
-import { mockWithImage } from '../../libs/camera-mock.js';
-const THREE = window.MINDAR.IMAGE.THREE;
+import { mockWithImage } from '../../libs/camera-mock.js'; // helper fx to mock webcam
+const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
 // Create createYoutube() using YT iframe api
 // https://developers.google.com/youtube/iframe_api_reference
@@ -34,13 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create a player 
     const player = await createYoutube();
 
+    // Instantiate mindarThree object which in turn auto instantiates three.js renderer, cssRender, cssScene, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/course-banner.mind',
+      container: document.body, // size of renderer <canvas>
+      imageTargetSrc: '../../assets/targets/course-banner.mind', // compiled image target
     });
-    const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
+    const {renderer, cssRenderer, cssScene, camera} = mindarThree;
 
-    // Create a css object: <div>
+    // Create a css object: <div id="ar-div"> with an embeded <div id="player"> as required by
+    // https://developers.google.com/youtube/iframe_api_reference
     const obj = new CSS3DObject(document.querySelector("#ar-div"));
     const cssAnchor = mindarThree.addCSSAnchor(0);
     cssAnchor.group.add(obj);

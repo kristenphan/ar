@@ -1,5 +1,5 @@
-import {mockWithImage, mockWithVideo} from '../../libs/camera-mock.js';
-const THREE = window.MINDAR.IMAGE.THREE;
+import {mockWithImage, mockWithVideo} from '../../libs/camera-mock.js'; // helper fx to mock webcam
+const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
 // Load .js code after html document is loaded
 // If a hand is detected, show a red plane. If not, show a blue plane
@@ -9,12 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Create start() to start AR using MindAR engine
   const start = async() => {
-    // Instantiate mindarThree object with the compiled image target .mind
+    // Instantiate mindarThree object which in turn auto instantiates three.js renderer, scene, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/course-banner.mind',
+      container: document.body, // size of renderer <canvas>
+      imageTargetSrc: '../../assets/targets/course-banner.mind', // compiled image target
     });
-    // mindarThree auto instantiates three.js renderer, scene, camera
     const {renderer, scene, camera} = mindarThree;
 
     // Create planes: plane = blue; plane2 = red
@@ -28,20 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Create a MindAR anchor using 1st image target with idx=0
     const anchor = mindarThree.addAnchor(0);
-    // Add planes to anchor
+    // Add planes to anchor. All objects associated with an anchor will inherit anchor's position and orientation
     anchor.group.add(plane);
     anchor.group.add(plane2);
 
-    // Set up tensorflow.js hand pose model
-    // Hand pose model requires the camera feed to run and detect hands
+    // Set up tensorflow.js hand pose model which requires camera feed to run and detect hands
     const model = await handpose.load();
 
-    // Start MindAR engine
-    // (Re)render AR contents for every video frame using render loop
+    // Start MindAR engine. Then (re)render AR contents for every video frame using render loop
     await mindarThree.start();
     renderer.setAnimationLoop(() => {
       renderer.render(scene, camera);
     });
+    
     // Get camera feed and later pass cameraFeed to model.estimateHands() to detect hands
     const cameraFeed = mindarThree.video;
         

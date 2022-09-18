@@ -1,13 +1,13 @@
-import {loadGLTF} from "../../libs/loader.js";
-const THREE = window.MINDAR.IMAGE.THREE;
+import {loadGLTF} from "../../libs/loader.js"; // helper fx which makes use of GLTFLoader.js to load gltf model 
+const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
+// Load .js after html doc has loaded
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
-    // Instantiate mindarThree object with the compiled image(s) target
-    // mindarThree will auto instantiate renderer, screne, camera
+    // Instantiate mindarThree object which will auto instantiate renderer, screne, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body,
-      imageTargetSrc: '../../assets/targets/musicband.mind',
+      container: document.body, // size of renderer canvas
+      imageTargetSrc: '../../assets/targets/musicband.mind', // compiled image target
     });
     const {renderer, scene, camera} = mindarThree;
 
@@ -20,8 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     raccoon.scene.scale.set(0.1, 0.1, 0.1);
     raccoon.scene.position.set(0, -0.4, 0);
 
-    // Add model to anchor
-    // All models associated with an anchor will inherit anchor's position and orientation
+    // Add model to anchor. All models associated with an anchor will inherit anchor's position and orientation
     const anchor = mindarThree.addAnchor(0);
     anchor.group.add(raccoon.scene);
 

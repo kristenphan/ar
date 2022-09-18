@@ -3,7 +3,7 @@ import {mockWithVideo, mockWithImage} from '../../libs/camera-mock.js';
 
 const THREE = window.MINDAR.IMAGE.THREE;
 
-// Able to detect multiple markers, but only able to track one marker at a time and render a model on that marker at a time
+// Able to detect multiple markers, but only able to track ONE marker at a time and render a model on that marker
 // E.g., hold up image of raccoon first, put that image down, then hold up another image of bear
 // For detecting and tracking multiple targets, see "multi-track"
 document.addEventListener('DOMContentLoaded', () => {

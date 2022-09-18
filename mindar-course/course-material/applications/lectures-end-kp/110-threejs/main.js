@@ -7,11 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// In threejs, a 3D object is presented as a Mesh
 	// and consists of: 1) geometry 2) material = property of the geometry
+	// Create a 3D cube
 	const geometry = new THREE.BoxGeometry(1, 1, 1);
 	const material = new THREE.MeshBasicMaterial({color: '#0000FF'});
 	const cube = new THREE.Mesh(geometry, material);
 
-	// Create a 3D cube
+	// Add cube to scene; position and rotate cube
 	scene.add(cube);
 	cube.position.set(0., 0, -2);
 	cube.rotation.set(0, Math.PI/4, 0);
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	camera.position.set(1, 1, 5);
 
 	// When creating WebGLRenderer renderer, a html <canvas> element is auto created
-	// alpha: true = make the background of the canvas renderer object ransparent
+	// alpha: true = make the background of the canvas renderer object transparent
 	const renderer = new THREE.WebGLRenderer({alpha: true});
 	// 500 pixel in width and height
 	renderer.setSize(500, 500);

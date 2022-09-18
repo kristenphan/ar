@@ -7,8 +7,10 @@
     <script src="../../libs/mindar/mindar-image-aframe.prod.js"></script>
   </head>
   <body>
-    <!-- Set vr-mode-ui="enabled: false" to hide the default VR/AR buttons which will trigger webXR mode  
-         color-space and renderer are custom renderer setting -->
+    <!-- 
+      <a-scene> maps 1-to-1 with three.js scene: https://aframe.io/docs/1.3.0/introduction/developing-with-threejs.html
+      Set vr-mode-ui="enabled: false" to hide the default VR/AR buttons which will trigger webXR mode  
+      "color-space" and "renderer" are custom renderer setting -->
     <a-scene mindar-image="imageTargetSrc: ../../assets/targets/musicband.mind" 
             color-space="sRGB" 
             renderer="colorManagement: true, physicallyCorrectLights" 
@@ -19,14 +21,13 @@
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <!-- Add mindar-image-target to <a-entity> to create an anchor using compiled image target 
-           referenced by its idx. This <a-entity> works like a THREE.GROUP that will update 
-            the position of all of its associated entities continuously.
-            Add any type of a-frame entities to this anchor e.g., <a-gltf-model> here -->
+      <!-- Add "mindar-image-target" to <a-entity> to create an *anchor* using compiled image target referenced by its idx
+           This <a-entity> works like a THREE.GROUP that will update the position of all of its associated entities continuously.
+           Add any type of a-frame entities to this anchor e.g., <a-gltf-model> here -->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-gltf-model rotation="0 0 0 " position="0 -0.4 0" scale="0.1 0.1 0.1" src="#raccoonModel">
       </a-entity>
-      <!-- Can add another <a-entity> here referencing different image target e.g. targetIndex: 1 -->
+      <!-- Can add another <a-entity> here referencing different image target e.g. "targetIndex: 1" -->
     </a-scene>
   </body>
 </html>
