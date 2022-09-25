@@ -1,6 +1,6 @@
-import * as THREE from '../../libs/three.js-r132/build/three.module.js';
+import * as THREE from 'three';
 // Import ARButton as it is not part of three.js core api
-import {ARButton} from '../../libs/three.js-r132/examples/jsm/webxr/ARButton.js';
+import {ARButton} from 'https://unpkg.com/three@0.144.0/examples/jsm/webxr/ARButton.js';
 
 // Load .js code after html document has loaded
 document.addEventListener('DOMContentLoaded', () => {
