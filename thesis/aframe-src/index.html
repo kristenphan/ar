@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+    <!-- Important to import aframe.min.js first, then mindar-image-aframe.prod.js -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <!--aframe-look-at-component to tell an entity to face towards another entity or position-->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <!-- importing html-embed-component to add html elements to a-scene -->
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel=“shortcut icon” href=“#”/> <!--Temp fix for missing favicon icon error -->
+  </head>
+  <body>
+    <!-- <a-scene> == three.js scene
+    Set vr-mode-ui="enabled: false" to hide the default VR/AR buttons and avoid triggering webXR mode  
+    "color-space" and "renderer" are custom renderer setting -->
+    <a-scene mindar-image="imageTargetSrc: ../assets/targets/kp.mind" 
+            color-space="sRGB" 
+            renderer="colorManagement: true, physicallyCorrectLights" 
+            vr-mode-ui="enabled: false" 
+            device-orientation-permission-ui="enabled: false">
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <!-- Create a MindAR "anchor" entity using image target with idx=0 -->
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-entity htmlembed="ppu: 256" position="0 0 0" rotation="0 0 0" scale="1 1 1" look-at="[camera]">
+          <div class="widget">
+            <div class="left-panel panel">
+              <div class="date"> [date] </div>
+              <div class="location"> [loc] </div>
+              <div class="icontemp">
+                <img src="../assets/images/thunder.png" alt="weather-icon" width="50">
+                <div class="tempC"> [temp] </div>
+              </div>
+            </div>
+            <div class="right-panel panel"> 
+              <img src="../assets/images/acn.png" alt="acn-logo" width="70">
+            </div>
+          </div>
+        </a-entity>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

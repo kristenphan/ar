@@ -1,6 +1,6 @@
 // Import CSS3DObject explicitly as it is not part of three.js core api
 import {CSS3DObject} from '../../libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js';
-import {mockWithImage} from '../../libs/camera-mock.js'; // helper fx to mock webcam for testing
+import {mockWithImage, mockWithVideo} from '../../libs/camera-mock.js'; // helper fx to mock webcam for testing
 import {loadGLTF} from '../../libs/loader.js'; // helper fx to load GLTF
 const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
 
@@ -8,7 +8,8 @@ const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-i
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
     // Use mock image for testing
-    mockWithImage('../../assets/mock-videos/course-banner2.png');
+    /* mockWithImage('../../assets/mock-videos/course-banner2.png'); */
+    mockWithVideo("../../assets/mock-videos/course-banner1.mp4");
 
     // Instantiate mindarThree object which in turn auto instantiates 
     // three.js renderer, cssRenderer, scene, cssScene, camera

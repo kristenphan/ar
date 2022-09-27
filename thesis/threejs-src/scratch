@@ -1,0 +1,10 @@
+1) yes working: create <div> and CSS3DObject from <div>
+    // Create a CSS3DObject panel
+		/* const panelDiv = document.createElement("div");
+		panelDiv.style.background = "#FFFFFF";
+		panelDiv.style.width = "440px";
+		panelDiv.style.height = "120px";
+		panelDiv.style.borderStyle = "solid"; */
+
+2) 
+

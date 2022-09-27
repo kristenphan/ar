@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // if intersects includes an object of interest ie. object was clicked, play audio
       if (intersects.length > 0) {
         let o = intersects[0].object;
-        // Since o might be a descendant object of the object of interest, raccoon
+        // Since o might be a descendant object of the object of interest, raccoon,
         // need to recursively go up the hierarchy through the parent 
         // and check if any of the parent object = raccoon
         while (o.parent && !o.userData.clickable) { // Recursively go up if o has a parent && not clickable

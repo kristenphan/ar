@@ -1,0 +1,56 @@
+div.widget {
+  background-color: #fcfdfd;
+  width: 440px;
+  height: 120px;
+  text-align: left;
+  border-radius: 9px;
+  padding: 10px;
+  border-style: solid;
+  border-width: medium;
+}
+  
+div.panel {
+  display: inline-block;
+}
+  
+div.left-panel {
+  padding-left: 20px;
+}
+  
+div.right-panel {
+  position: absolute;
+  float: left;
+  top: 0;
+  margin-top: 35px;
+  padding-left: 100px;
+}
+  
+div.date {
+  color: black;
+  opacity: 0.5;
+}
+  
+div.location {
+   color: black;
+   opacity: 0.7;
+   font-size: 21px;
+   font-weight: bold;
+   text-transform: uppercase;
+   padding-top: 5px;
+}
+  
+/*  no difference when trying font-weight: thin */
+div.tempC {
+  font-size: 61px;
+  color: black;
+  opacity: 0.9;
+}
+  
+div.icontemp {
+  display: flex;
+  align-items: center;
+}
+  
+div.tempC {
+  padding-left: 20px;
+}

@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript"> // try adding script here for mock webcam. did not work
+      navigator.mediaDevices.getUserMedia = () => {
+        return new Promise((resolve, reject) => {
+          const canvas = document.createElement("canvas");
+          const context = canvas.getContext("2d");
+    
+          const image = new Image();
+          image.onload = () => {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            context.drawImage(image, 0, 0, image.width, image.height);
+            const stream = canvas.captureStream();
+            resolve(stream);
+          }
+          image.src = "./assets/mock-videos/kp.png";
+        });
+      };
+      navigator.mediaDevices.getUserMedia();
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image.prod.js"></script>
+    <!-- Important to import aframe.min.js first, then mindar-image-aframe.prod.js -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-aframe.prod.js"></script>
+    <!--aframe-look-at-component to tell an entity to face towards another entity or position-->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <!-- importing html-embed-component to add html elements to a-scene -->
+    <script src="https://supereggbert.github.io/aframe-htmlembed-component/dist/build.js"></script>
+    <script src="./main.js" type="module"></script>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel=“shortcut icon” href=“#”/> <!--Temp fix for missing favicon icon error -->
+  </head>
+  <body>
+    <!-- <a-scene> == three.js scene
+    Set vr-mode-ui="enabled: false" to hide the default VR/AR buttons and avoid triggering webXR mode  
+    "color-space" and "renderer" are custom renderer setting -->
+
+  </body>
+</html>
