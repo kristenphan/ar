@@ -1,1 +1,10 @@
 body {margin: 0}
+
+#banner {
+  position: fixed;
+  top: 10px;
+  width: 97%;
+  border: 3px dashed black;
+  background-color: gold;
+  text-align: center;
+}
