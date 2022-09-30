@@ -85,13 +85,13 @@ document.addEventListener('DOMContentLoaded', () => {
       // Added libs/loader.js/loadFont();
       const quote = quotes[idx];
       const font = await loadFont('./assets/fonts/gentilis_regular.typeface.json'); // font.type = Font
-      const textGeometry = new TextGeometry(quote, {font: font, size: 80, height: 5});
+      const textGeometry = new TextGeometry(quote, {font: font, size: 1, height: 0.05});
       const textMaterial = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
       const text = new THREE.Mesh(textGeometry, textMaterial);
       text.position.set(box.position["x"], box.position["y"] - 0.04, box.position["z"]);
 
       const cubeGeometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-      const cubeMaterial = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent: true, opacity: 0.2});
+      const cubeMaterial = new THREE.MeshBasicMaterial({color: "gold", transparent: true, opacity: 0.2});
       const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
       cube.position.set(text.position["x"], text.position["y"], text.position["z"]);
 
