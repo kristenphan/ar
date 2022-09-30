@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const textGeometry = new TextGeometry(quote, {font: font, size: 8000, height: 500});
       const textMaterial = new THREE.MeshBasicMaterial({color: "black"});
       const text = new THREE.Mesh(textGeometry, textMaterial);
-      text.position.set(box.position["x"], box.position["y"] - 0.02, box.position["z"]);
+      text.position.set(box.position["x"], box.position["y"] - 0.1, box.position["z"]);
 
       /* const cubeGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
       const cubeMaterial = new THREE.MeshBasicMaterial({color: "gold"});
