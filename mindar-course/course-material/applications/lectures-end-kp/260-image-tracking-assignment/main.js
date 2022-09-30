@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const planeGeometry = new THREE.PlaneGeometry(1, 0.552);
     const cardMaterial = new THREE.MeshBasicMaterial({map: cardTexture});
     const card = new THREE.Mesh(planeGeometry, cardMaterial);
+    /* console.log("cardTexture.type: ", cardTexture.type); // texture.type:  1009 */
 
     // Create and position circles with email, web, profile, and location icons
     const iconGeometry = new THREE.CircleGeometry(0.075, 32);
@@ -204,19 +205,19 @@ document.addEventListener('DOMContentLoaded', () => {
           } 
           // If any of the icons is clicked, make the CSS3DObject visible and update the content of CSS3DObject 
           else if (o === webIcon) {
-            textObj.visible = true;
+            textCSSObj.visible = true;
             textElement.innerHTML = "https://github.com/hiukim/mind-ar-js";
           } 
           else if (o === emailIcon) {
-            textObj.visible = true;
+            textCSSObj.visible = true;
             textElement.innerHTML = "hiukim528 [at] gmail";
           } 
           else if (o === profileIcon) {
-            textObj.visible = true;
+            textCSSObj.visible = true;
             textElement.innerHTML = "https://hiukim.com";
           } 
           else if (o === locationIcon) {
-            textObj.visible = true;
+            textCSSObj.visible = true;
             textElement.innerHTML = "Vancouver, Canada";
           }
         }
