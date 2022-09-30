@@ -1,8 +1,7 @@
 import * as THREE from './libs/three.js-r132/build/three.module.js';
-const loader = new THREE.TextureLoader();
+const loader = new THREE.TextureLoader(); // not using libs/loader.js/loadTexter bc it gives error: weak map
 // Import ARButton as it is not part of three.js core api
-import {ARButton} from 'https://unpkg.com/three@0.144.0/examples/jsm/webxr/ARButton.js';
-/* import { loadTexture } from './libs/loader.js'; */ // Not using loadTexture() when loading cube's texture bc it gives error: weak map
+import {ARButton} from './libs/three.js-r132/examples/jsm/webxr/ARButton.js';
 
 // Load .js code after html document has loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -41,11 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Whenever user clicks on screen, place a 3d box there
     controller.addEventListener('select', async() => {
       // Create a box of random color
-      const geometry = new THREE.BoxGeometry(0.06, 0.06, 0.06);
+      const geometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
       /* const material = new THREE.MeshBasicMaterial({color: 0xffffff * Math.random()}); */
       /* const texture = await loadTexture("./assets/images/1.jpg"); */
       /* console.log("texture.type: ", texture.type); // texture.type:  1009, same as image-tracking-assignment */
-      const material = new THREE.MeshBasicMaterial({map: loader.load("./assets/images/1.jpg")});
+      console.log(`./assets/images/${Math.random(6)}.jpg`);
+      const material = new THREE.MeshBasicMaterial({map: loader.load(`./assets/images/${Math.floor(Math.random() * 6)}.jpg`)});
       const box = new THREE.Mesh(geometry, material);
       // Position box at the controller's location
       box.position.applyMatrix4(controller.matrixWorld);
