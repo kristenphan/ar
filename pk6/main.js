@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       text.position.set(box.position["x"], box.position["y"] - 0.04, box.position["z"]);
 
       const cubeGeometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-      const cubeMaterial = new THREE.MeshBasicMaterial({color: 0x00ffff, opacity: 0.2});
+      const cubeMaterial = new THREE.MeshBasicMaterial({color: 0x00ffff, transparent: true, opacity: 0.2});
       const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
       cube.position.set(text.position["x"], text.position["y"], text.position["z"]);
 
