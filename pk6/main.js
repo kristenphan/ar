@@ -86,25 +86,25 @@ document.addEventListener('DOMContentLoaded', () => {
       const quote = quotes[idx];
       const font = await loadFont('./assets/fonts/gentilis_regular.typeface.json'); // font.type = Font
       const textGeometry = new TextGeometry(quote, {font: font, size: 8000, height: 500});
-      const textMaterial = new THREE.MeshBasicMaterial({color: "black"});
+      const textMaterial = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
       const text = new THREE.Mesh(textGeometry, textMaterial);
-      text.position.set(box.position["x"], box.position["y"] - 0.1, box.position["z"]);
+      text.position.set(box.position["x"], box.position["y"] - 0.04, box.position["z"]);
 
-      /* const cubeGeometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-      const cubeMaterial = new THREE.MeshBasicMaterial({color: "gold"});
+      const cubeGeometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
+      const cubeMaterial = new THREE.MeshBasicMaterial({color: 0x00ffff, opacity: 0.2});
       const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-      cube.position.set(text.position["x"], text.position["y"], text.position["z"]); */
+      cube.position.set(text.position["x"], text.position["y"], text.position["z"]);
 
       console.log("box.position = ", box.position);
       console.log("text.position = ", text.position);
-      /* console.log("cube.position = ", cube.position); */
+      console.log("cube.position = ", cube.position);
 
       // Make quote lookAt(camera)
 
       // Add to scene
       scene.add(box);
       scene.add(text);
-      /* scene.add(cube); */
+      scene.add(cube);
     });
     // Start renderer loop and (re)render for every video frame
     renderer.setAnimationLoop(() => {
