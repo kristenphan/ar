@@ -37,20 +37,20 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(controller);
 
     // Create an array of loving messages corresponding to pics
-    const quotes = ["I❤U bc you are utterly silly", 
-                  "I❤U bc you asked",
-                  "I❤U bc you hold my hands",
-                  "I❤U bc you go explore with me",
-                  "I❤U bc you pulled me in when I crashed on your bunk bed",
-                  "I❤U bc you remember day 1 of our relationship",
-                  "I❤U bc you accept my love languages",
-                  "I❤U bc you teach me boundaries",
-                  "I❤U bc you rub stinky oil on your eyes every time but give me a massage anyway",
-                  "I❤U bc you cook for me. We then meditate and laugh",
-                  "I❤U bc you grow sweeter and more affectionate as our relationship grows",
-                  "I❤U bc you don't even like taking pics but send me yours anyway",
-                  "I❤U bc you hold my hands under the table",
-                  "I❤U bc you let me share big and small moments with you"];
+    const quotes = ["ILY bc you are utterly silly", 
+                  "ILY bc you asked",
+                  "ILY bc you hold my hands",
+                  "ILY bc you go explore with me",
+                  "ILY bc you pulled me in when I crashed on your bunk bed",
+                  "ILY bc you remember day 1 of our relationship",
+                  "ILY bc you accept my love languages",
+                  "ILY bc you teach me boundaries",
+                  "ILY bc you rub stinky oil on your eyes every time but give me a massage anyway",
+                  "ILY bc you cook for me. We then meditate and laugh",
+                  "ILY bc you grow sweeter and more affectionate as our relationship grows",
+                  "ILY bc you don't even like taking pics but send me yours anyway",
+                  "ILY bc you hold my hands under the table",
+                  "ILY bc you let me share big and small moments with you"];
 
     // Whenever user clicks on screen, place a 3d box there
     controller.addEventListener('select', async() => {
@@ -85,30 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
       // Added libs/loader.js/loadFont();
       const quote = quotes[idx];
       const font = await loadFont('./assets/fonts/gentilis_regular.typeface.json'); // font.type = Font
-      const textGeometry = new TextGeometry(quote, {font: font, size: 0.005, height: 0.0005});
-      const textMaterial = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
+      const textGeometry = new TextGeometry(quote, {font: font, size: 0.0015, height: 0.00015});
+      const textMaterial = new THREE.MeshBasicMaterial({color: "gold", side: THREE.DoubleSide});
       const text = new THREE.Mesh(textGeometry, textMaterial);
-      text.position.set(box.position["x"], box.position["y"] - 0.04, box.position["z"]);
-
-      const cubeGeometry = new THREE.BoxGeometry(0.01, 0.01, 0.01);
-      const cubeMaterial = new THREE.MeshBasicMaterial({color: "gold", transparent: true, opacity: 0.2});
-      const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-      cube.position.set(text.position["x"], text.position["y"], text.position["z"]);
-
-      console.log("box.position = ", box.position);
-      console.log("text.position = ", text.position);
-      console.log("cube.position = ", cube.position);
+      text.position.set(box.position["x"] - 0.025, box.position["y"] - 0.04, box.position["z"]);
 
       // Make quote lookAt(camera)
 
       // Add to scene
       scene.add(box);
       scene.add(text);
-      scene.add(cube);
     });
     // Start renderer loop and (re)render for every video frame
     renderer.setAnimationLoop(() => {
-    renderer.render(scene, camera);
+      renderer.render(scene, camera);
     });
   }
   initialize();
