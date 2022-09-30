@@ -1,9 +1,7 @@
 import * as THREE from './libs/three.js-r132/build/three.module.js';
 // Import ARButton + CSS3DObject + CSS3DRenderer as they are not part of three.js core api
 import {ARButton} from './libs/three.js-r132/examples/jsm/webxr/ARButton.js';
-import {CSS3DObject, CSS3DRenderer} from './libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js';
 import {TextGeometry} from './libs/three.js-r132/examples/jsm/geometries/TextGeometry.js';
-import {FontLoader, Font} from './libs/three.js-r132/examples/jsm/loaders/FontLoader.js';
 import {loadFont} from './libs/loader.js';
 const textureLoader = new THREE.TextureLoader(); // not using libs/loader.js/loadTexter bc it gives error: weak map
 
@@ -66,21 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Rotate the box so it's facing us
       box.quaternion.setFromRotationMatrix(controller.matrixWorld);
 
-      // POSTPONE USING CSS3DOBJECT SINCE IDK HOW TO ENABLE WEBXR FOR CSS3DRENDERER
-      // NEED TO RELY ONLY ON RENDERER FOR NOW BY USING TEXTGEOMETRY
-      // Create a CSS3DObject from <div> to display quote retrieved by randomized index
-      /* const quoteDiv = document.createElement("div");
-      quoteDiv.innerHTML = quotes[idx];
-      quoteDiv.style.background = "#FFFFFF";
-      quoteDiv.style.padding = "30px";
-      quoteDiv.style.fontSize = "60px"; 
-      const quoteCSS3DObj = new CSS3DObject(quoteDiv); // quoteCSS3DObj.type = Object3D
-      const {x, y, z} = box.position;
-      quoteCSS3DObj.position.set(x, y + 1, z); 
-      console.log('box.position = ', box.position);
-      console.log('quoteCSS3DObj.position = ', quoteCSS3DObj.position); 
-      cssScene.add(quoteCSS3DObj);*/
-
       // Create text geometry
       // Added libs/loader.js/loadFont();
       const quote = quotes[idx];
@@ -89,8 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const textMaterial = new THREE.MeshBasicMaterial({color: "black", side: THREE.DoubleSide});
       const text = new THREE.Mesh(textGeometry, textMaterial);
       text.position.set(box.position["x"] - 0.025, box.position["y"] - 0.04, box.position["z"]);
-
-      // Make quote lookAt(camera)
 
       // Add to scene
       scene.add(box);
