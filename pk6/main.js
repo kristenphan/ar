@@ -1,8 +1,8 @@
-import * as THREE from 'three';
+import * as THREE from '../../libs/three.js-r132/build/three.module.js';
+const loader = new THREE.TextureLoader();
 // Import ARButton as it is not part of three.js core api
 import {ARButton} from 'https://unpkg.com/three@0.144.0/examples/jsm/webxr/ARButton.js';
-/* import { loadTexture } from './libs/loader.js'; */
-const loader = new THREE.TextureLoader();
+/* import { loadTexture } from './libs/loader.js'; */ // Not using loadTexture() when loading cube's texture bc it gives error: weak map
 
 // Load .js code after html document has loaded
 document.addEventListener('DOMContentLoaded', () => {

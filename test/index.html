@@ -1,20 +1,15 @@
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="./mindar-image-three.prod.js"></script>
-    <script src="./main.js" type="module"></script>
-
-    <style>
-      html, body {position: relative; margin: 0; width: 100%; height: 100%; overflow: hidden}
-      #ar-div {visibility: hidden;}
-    </style>
-  </head>
-  <body>
-    <div id='ar-div'>
-      <iframe src='https://player.vimeo.com/video/553110309?h=dc4ee31dc4'
-              width='1000'
-              height='1000'>
-      </iframe>
-    </div>
-  </body>
+<head>
+  <script src="./main.js" type="module"></script>
+  <link rel="stylesheet" href="./styles.css"/>
+</head>
+<body>
+  <canvas id="c"></canvas>
+  <script  type="importmap">{
+	"imports": {
+		"three": "https://threejs.org/build/three.module.js"
+	}
+}</script><!-- Remove this when import maps will be widely supported -->
+<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+</body>
 </html>

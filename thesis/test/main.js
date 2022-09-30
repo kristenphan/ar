@@ -1,34 +1,55 @@
-// Import CSS3DObject explicitly as it is not part of three.js core api
-import {CSS3DObject} from "../../mindar-course/course-material/applications/libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js";
-import {mockWithVideo} from '../libs/camera-mock.js'; // helper fx to mock webcam for testing
-const THREE = window.MINDAR.IMAGE.THREE; // three.js is a dependency of mindar-image-three.prod.js
+import {mockWithVideo} from '../libs/camera-mock.js';
+import { loadGLTF,loadTexture } from "../libs/loader.js";
+const THREE = window.MINDAR.IMAGE.THREE;
 
-// Load .js code after html doc has loaded
 document.addEventListener('DOMContentLoaded', () => {
   const start = async() => {
-    // Use mock image for testing
-    mockWithVideo("../assets/mock-videos/course-banner1.mp4");
+    mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
 
-    // Instantiate mindarThree object which in turn auto instantiates 
-    // three.js renderer, cssRenderer, scene, cssScene, camera
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.body, // size of renderer canvas
-      imageTargetSrc: '../assets/targets/course-banner.mind', // compiled image target
+      container: document.body,
+      imageTargetSrc: "../assets/targets/kp.mind",
     });
-    const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
+    const {renderer, scene, camera} = mindarThree;
+    const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+    scene.add(light);
 
-    // Create a css object which is later added to cssAnchor
-    // This css object has CSS styling: blue square <div>
-    const cssObj = new CSS3DObject(document.querySelector('#ar-div'));
-    // Use addCSSAnchor() to create a MindAR anchor for CSS content
-    const cssAnchor = mindarThree.addCSSAnchor(0);
-    cssAnchor.group.add(cssObj);
+    // Create a round shape
+    let x = 1; let y = 1; let width = 50; let height = 50; let radius = 20        
+    let shape = new THREE.Shape();
+    shape.moveTo( x, y + radius );
+    shape.lineTo( x, y + height - radius );
+    shape.quadraticCurveTo( x, y + height, x + radius, y + height );
+    shape.lineTo( x + width - radius, y + height );
+    shape.quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
+    shape.lineTo( x + width, y + radius );
+    shape.quadraticCurveTo( x + width, y, x + width - radius, y );
+    shape.lineTo( x + radius, y );
+    shape.quadraticCurveTo( x, y, x, y + radius );
 
-    // Start MindAR engine and re-render both CSS object and gltf model for each video frame
+    // Creat a round button from round shape
+    const geometry = new THREE.ShapeBufferGeometry(shape);
+    const material = new THREE.MeshBasicMaterial({color: 0x00ffff});
+    const button = new THREE.Mesh(geometry, material);
+    /* console.log(button.type) */ // console: MESH
+
+    // Load gltf
+    const gltf = await loadGLTF("../assets/models/musicband-raccoon/scene.gltf");
+    gltf.scene.scale.set(0.1, 0.1, 0.1); 
+    gltf.scene.position.set(0, -0.4, 0);
+
+    // Creat a MindAR anchor and add button to anchor
+    const anchor = mindarThree.addAnchor(0);
+    anchor.group.add(button);
+    anchor.group.add(gltf.scene);
+
+    // Start MindAR engine
     await mindarThree.start();
+
+    // Start rendering loop
     renderer.setAnimationLoop(() => {
-      cssRenderer.render(cssScene, camera);
+      renderer.render(scene, camera);
     });
-  }
-  start();
+  };
+  start()
 });
