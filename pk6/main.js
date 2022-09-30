@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Added libs/loader.js/loadFont();
       const quote = quotes[idx];
       const font = await loadFont('./assets/fonts/gentilis_regular.typeface.json'); // font.type = Font
-      const textGeometry = new TextGeometry(quote, {font: font, size: 8000, height: 500});
+      const textGeometry = new TextGeometry(quote, {font: font, size: 80, height: 5});
       const textMaterial = new THREE.MeshBasicMaterial({color: "red", side: THREE.DoubleSide});
       const text = new THREE.Mesh(textGeometry, textMaterial);
       text.position.set(box.position["x"], box.position["y"] - 0.04, box.position["z"]);
