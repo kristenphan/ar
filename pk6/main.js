@@ -9,10 +9,10 @@ const textureLoader = new THREE.TextureLoader(); // not using libs/loader.js/loa
 document.addEventListener('DOMContentLoaded', () => {
   const initialize = async() => {
     // Instantiate three.js scene, camera, and renderer
-    const scene = new THREE.Scene(); // cssScene = new THREE.Scene();
+    const scene = new THREE.Scene(); // const cssScene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
-    const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); // renderer.type/cssRenderer.type = undefined 
-    // new css3DRenderer = new CSS3DRenderer();
+    const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); // const css3DRenderer = new CSS3DRenderer(); 
+    
 
     // Make renderer full-screen
     renderer.setPixelRatio(window.devicePixelRatio);
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     scene.add(controller);
 
     // Create an array of loving messages corresponding to pics
-    const quotes = ["ILY bc you are utterly silly", 
+    const messages = ["ILY bc you are utterly silly", 
                   "ILY bc you asked",
                   "ILY bc you hold my hands",
                   "ILY bc you go explore with me",
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   "ILY bc you hold my hands under the table",
                   "ILY bc you let me share big and small moments with you"];
 
-    // Whenever user clicks on screen, place a 3d box there
+    // Whenever user clicks on screen, place a 3d box and text at the click point. Text is rendered below box.
     controller.addEventListener('select', async() => {
       // Get a random index for retrieving images and quotes[]
       const n = 14 // no of photos = no of quotes[]
@@ -64,16 +64,17 @@ document.addEventListener('DOMContentLoaded', () => {
       // Rotate the box so it's facing us
       box.quaternion.setFromRotationMatrix(controller.matrixWorld);
 
-      // Create text geometry
-      // Added libs/loader.js/loadFont();
-      const quote = quotes[idx];
+      // Create text geometry to display a message underneath a box
+      // Text and box are rendered after user taps device screen
+      // THREE.DoubleSide = render both sides of text. Otherwise, text might disappear when looking at text from the back
+      const message = messages[idx];
       const font = await loadFont('./assets/fonts/gentilis_regular.typeface.json'); // font.type = Font
-      const textGeometry = new TextGeometry(quote, {font: font, size: 0.0018, height: 0.00018});
-      const textMaterial = new THREE.MeshBasicMaterial({color: "black", side: THREE.DoubleSide});
+      const textGeometry = new TextGeometry(message, {font: font, size: 0.0018, height: 0.00018});
+      const textMaterial = new THREE.MeshBasicMaterial({color: "black", side: THREE.DoubleSide}); 
       const text = new THREE.Mesh(textGeometry, textMaterial);
       text.position.set(box.position["x"] - 0.025, box.position["y"] - 0.04, box.position["z"]);
 
-      // Add to scene
+      // Add box + text to scene
       scene.add(box);
       scene.add(text);
     });
