@@ -36,23 +36,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create an array of loving messages corresponding to pics
     const messages = ["ILY bc you are utterly silly", 
                   "ILY bc you asked",
-                  "ILY bc you hold my hands",
+                  "ILY bc you make sure our hands intertwined when I happen to hold yours half-heartedly",
                   "ILY bc you go explore with me",
                   "ILY bc you pulled me in when I crashed on your bunk bed",
                   "ILY bc you remember day 1 of our relationship",
                   "ILY bc you accept my love languages",
-                  "ILY bc you teach me boundaries",
+                  "ILY bc you make efforts for us",
                   "ILY bc you rub stinky oil on your eyes every time but give me a massage anyway",
                   "ILY bc you cook for me. We then meditate and laugh",
                   "ILY bc you grow sweeter and more affectionate as our relationship grows",
                   "ILY bc you don't even like taking pics but send me yours anyway",
-                  "ILY bc you hold my hands under the table",
                   "ILY bc you let me share big and small moments with you"];
 
     // Whenever user clicks on screen, place a 3d box and text at the click point. Text is rendered below box.
     controller.addEventListener('select', async() => {
       // Get a random index for retrieving images and quotes[]
-      const n = 14 // no of photos = no of quotes[]
+      const n = 13 // no of photos = no of quotes[]
       const idx = Math.floor(Math.random() * n);
       // Create a box with image text
       const boxGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
