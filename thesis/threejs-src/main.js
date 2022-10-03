@@ -26,11 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		const cssAnchor = mindarThree.addCSSAnchor(0);
 		cssAnchor.group.add(dashboardCSSObject);
 
-		// Create another CSS3DObject to check if this object will shake relatively to dashboardCSSObject
-		const testDivCSSObject = new CSS3DObject(document.getElementById("button-div"));
-		testDivCSSObject.position.set(0, 0, 1);
-		cssAnchor.group.add(testDivCSSObject);
-
 		// Start MindAR engine
 		await mindarThree.start();
 
@@ -39,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Update dashboard's and button's position so that dashboard always faces towards camera
 			// before re-rendering cssScene as dashboard is attached to cssScene
 			dashboardCSSObject.lookAt(camera.position);
-			testDivCSSObject.lookAt(camera.position);
 
 			// Re-render scene and cssScene
 			renderer.render(scene, camera);
@@ -51,7 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const waterMeButton = document.getElementById("water-me-button");
 waterMeButton.addEventListener("click", () => {
-  console.log("button clicked. dashboard text changed to blue");
-	document.getElementById("dashboard").style.color = "blue";
+  console.log("water me button clicked");
+	/* document.getElementById("dashboard").style.color = "purple"; */
 	/* document.getElementById("dashboard-title").style.visibility = "hidden"; */
+});
+
+const viewHistoryButton = document.getElementById("view-history-button");
+viewHistoryButton.addEventListener("click", () => {
+  console.log("view history button clicked");
+});
+
+const aboutMeButton = document.getElementById("about-me-button");
+aboutMeButton.addEventListener("click", () => {
+  console.log("about me button clicked");
+});
+
+const getUpdatesButton = document.getElementById("get-updates-button");
+getUpdatesButton.addEventListener("click", () => {
+  console.log("get updates button clicked");
 });

@@ -2,15 +2,6 @@ div.text {
 	font-family: 'Montserrat', sans-serif;
 }
 
-/*#button {
-  border-radius: 20px; // not working
-} 
-
-.button:hover { // not working
-  background-color: red;
-  transition: 0.7s;
-} */
-
 #dashboard {
   visibility: hidden; 
   background: white;
@@ -20,6 +11,17 @@ div.text {
   padding: 40px;
 	border-radius: 20px;
 	/* opacity: 80%; */
+}
+
+#dashboard-left {
+  padding-left: 20px;
+}
+
+#dashboard-right {
+  position: absolute;
+  top: 0;
+  margin-top: 220px;
+  padding-left: 750px;
 }
 
 #dashboard-headline {
@@ -65,51 +67,20 @@ div.text {
   margin-left: 110px;
 }
 
-#button-div {
-  visibility: hidden;
+.button-group {
+  position: absolute;
+  float: left;
+  top: 0;
+  padding-left: 100px;
+  margin-top: 35px;
 }
 
 .button {
   width: 350px;
-  height: 110px;
+  height: 100px;
   background: GhostWhite;
   border: dashed 4px #9f1be5;
   border-radius: 20px;
   font-size: 40px;
+  margin-bottom: 20px;
 }
-
-/* .button {
-  visibility: hidden; */
-  /*position: relative;
-  background-color: #4CAF50;
-  border: none;
-  font-size: 28px;
-  color: #FFFFFF;
-  padding: 20px;
-  width: 200px;
-  text-align: center;
-  transition-duration: 0.4s;
-  text-decoration: none;
-  overflow: hidden;
-  cursor: pointer; 
-} */
-
-/* .button:after {
-  content: "";
-  background: #f1f1f1;
-  display: block;
-  position: absolute;
-  padding-top: 300%;
-  padding-left: 350%;
-  margin-left: -20px !important;
-  margin-top: -120%;
-  opacity: 0;
-  transition: all 0.8s
-}
-
-.button:active:after {
-  padding: 0;
-  margin: 0;
-  opacity: 1;
-  transition: 0s
-} */
