@@ -47,7 +47,7 @@ const waterMeButton = document.getElementById("water-me-button");
 waterMeButton.addEventListener("click", () => {
   console.log("water me button clicked");
 	/* document.getElementById("dashboard").style.color = "purple"; */
-	/* document.getElementById("dashboard-title").style.visibility = "hidden"; */
+	document.getElementById("dashboard-title").style.visibility = "hidden";
 });
 
 const viewHistoryButton = document.getElementById("view-history-button");
