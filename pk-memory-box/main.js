@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Instantiate three.js scene, camera, and renderer
     const scene = new THREE.Scene(); // const cssScene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 20);
-    const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); // const css3DRenderer = new CSS3DRenderer(); 
+    const renderer = new THREE.WebGLRenderer({antialias: true, alpha: true}); // alpha:true = make canvas transparent
+    // const css3DRenderer = new CSS3DRenderer(); 
     
     // Make renderer full-screen
     renderer.setPixelRatio(window.devicePixelRatio);
