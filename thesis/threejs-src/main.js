@@ -17,28 +17,41 @@ document.addEventListener("DOMContentLoaded", () => {
 			imageTargetSrc: "../assets/targets/kp.mind", // compiled image target
 		});
 		const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
-	
-		// Create a MindAR anchor
-		const anchor = mindarThree.addAnchor(0);
 
 		// Create a CSS3DObject from a <div> which has "visibility: hidden" css styling 
 		// so that <div> does not show before MindAR camera starts
-		const dashboardCSSObject = new CSS3DObject(document.querySelector("#dashboard"));
+		// dashboardCSSObject.children = [] since only 1 object is created using new CSS3DObject(). No child objects are auto created
+		// for <div>'s embeded inside <div id="dashboard">
+		const dashboardCSSObject = new CSS3DObject(document.getElementById("dashboard"));
 		const cssAnchor = mindarThree.addCSSAnchor(0);
 		cssAnchor.group.add(dashboardCSSObject);
+
+		// Create another CSS3DObject to check if this object will shake relatively to dashboardCSSObject
+		const testDivCSSObject = new CSS3DObject(document.getElementById("button-div"));
+		testDivCSSObject.position.set(0, 0, 1);
+		cssAnchor.group.add(testDivCSSObject);
 
 		// Start MindAR engine
 		await mindarThree.start();
 
 		// Start renderer loop to (re)render content for every video frame
 		renderer.setAnimationLoop(() => {
-			// Update dashboard's position so that dashboard always faces towards camera
+			// Update dashboard's and button's position so that dashboard always faces towards camera
 			// before re-rendering cssScene as dashboard is attached to cssScene
-			dashboardCSSObject.lookAt((camera.position));
+			dashboardCSSObject.lookAt(camera.position);
+			testDivCSSObject.lookAt(camera.position);
+
 			// Re-render scene and cssScene
 			renderer.render(scene, camera);
 			cssRenderer.render(cssScene, camera);
 		});
 	};
 	start();
+});
+
+const waterMeButton = document.getElementById("water-me-button");
+waterMeButton.addEventListener("click", () => {
+  console.log("button clicked. dashboard text changed to blue");
+	document.getElementById("dashboard").style.color = "blue";
+	/* document.getElementById("dashboard-title").style.visibility = "hidden"; */
 });
