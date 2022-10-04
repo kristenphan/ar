@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const start = async() => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		//mockWithImage("../assets/mock-videos/kp-horizontal.png");
-    //mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
+    mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
 
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
 		const mindarThree = new window.MINDAR.IMAGE.MindARThree({
@@ -17,6 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			imageTargetSrc: "../assets/targets/kp.mind", // compiled image target
 		});
 		const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
+		const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
+    scene.add(light);
 
 		// Create a cube
     const cubeGeometry = new THREE.BoxGeometry(0.05, 0.05, 0.05);
@@ -24,30 +26,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 		cube.position.set(0, 0, 0);
 
+		// Load gltf
+		/* const plantGLTF = await loadGLTF("../assets/models/musicband-raccoon/scene.gltf"); */
+		const plantGLTF = await loadGLTF("../assets/models/plant/scene.gltf");
+
 		// Create an anchor and add button to anchor
 		const anchor = mindarThree.addAnchor(0);
 		anchor.group.add(cube);
+		anchor.group.add(plantGLTF.scene); // causing error
 
 		// Start MindAR engine
 		await mindarThree.start();
 
 		// Start renderer loop to (re)render content for every video frame
 		renderer.setAnimationLoop(() => {
-			// Update dashboard's and button's position so that dashboard always faces towards camera
-			// before re-rendering cssScene as dashboard is attached to cssScene
-			/* dashboardCSSObject.lookAt(camera.position); */
-			/* testDivCSSObject.lookAt(camera.position); */
-			/* cube.lookAt(camera.position); */
-
 			// Re-render scene and cssScene
 			renderer.render(scene, camera);
 			cssRenderer.render(cssScene, camera);
 		});
 	};
 	start();
-});
-
-const waterMeButton = document.querySelector("#button");
-waterMeButton.addEventListener("click", () => {
-  alert("button clicked!");
 });
