@@ -1,15 +1,5 @@
 import {GLTFLoader} from "./three.js-r132/examples/jsm/loaders/GLTFLoader.js";
-import {FontLoader} from "./three.js-r132/examples/jsm/loaders/FontLoader.js";
 import * as THREE from "./three.js-r132/build/three.module.js";
-
-export const loadFont = (path) => {
-  return new Promise((resolve, reject) => {
-    const loader = new FontLoader();
-    loader.load(path, (font) => {
-      resolve(font);
-    });
-  });
-};
 
 export const loadGLTF = (path) => {
   return new Promise((resolve, reject) => {

@@ -34,8 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // gltf.scene is a THREE.GROUP element itself containing smaller objects which make up .gltf model as a whole
     // gltf.scene.isGroup = TRUE
     // These scaling and position measures are decided by trial n error
-    const gltf = await loadGLTF('../../assets/models/musicband-raccoon/scene.gltf');
-    gltf.scene.scale.set(0.1, 0.1, 0.1); 
+    /* const gltf = await loadGLTF('../../assets/models/musicband-raccoon/scene.gltf'); */
+    const gltf = await loadGLTF('../../assets/models/monstera/scene.gltf');
+    /* gltf.scene.scale.set(0.1, 0.1, 0.1);  */
     gltf.scene.position.set(0, -0.4, 0);
     // Add gltf.scene to anchor 
     anchor.group.add(gltf.scene);
