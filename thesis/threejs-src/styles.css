@@ -11,17 +11,17 @@
   background: white;
   width: 1200px;
   height: 700px;
-  border: 3px solid;
+  border: 5px solid;
   padding: 40px;
 	border-radius: 20px;
 	/* opacity: 80%; */
 }
 
-#dashboard-left {
+#dashboard-content {
   padding-left: 20px;
 }
 
-#dashboard-right {
+#dashboard-top-right {
   position: absolute;
   top: 0;
   margin-top: 220px;
@@ -75,7 +75,7 @@
   font-size: 40px;
   font-weight: regular;
   font-style: italic;
-	padding: 30px;
+	padding: 50px;
 }
 
 .button-group {
