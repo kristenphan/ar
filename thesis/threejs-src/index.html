@@ -13,26 +13,33 @@
 	</head>
 	<body>
 		<div id="dashboard">
-			<div id="dashboard-headline">
-				<img id="headline-image" src="../assets/images/acn.png" alt="acn-logo"/>
-				<div id="headline-text" class="text">Hello from Vincent van Grow! 😊</div>
+			<div id="dashboard-skeleton">
+				<div id="dashboard-headline">
+					<img id="headline-image" src="../assets/images/acn.png" alt="acn-logo"/>
+					<div id="headline-text" class="text">Hello from Vincent van Grow! 😊</div>
+				</div>
 			</div>
-			<div id="dashboard-content">
-				<div id="dashboard-title" class="text">dashboard-title</div>
+			<div id="dashboard-home">
+				<div id="dashboard-title" class="text">How am I feeling?</div>
 				<img id="water-cup" src="../assets/images/water-low.png" alt="water-cup"/>
 				<div id="humidity-reading" class="text">Humid: 25%</div>
-				<div id="plant-description" class="text hidden">plant-description</div>
+				<div id="dashboard-home-button">
+					<button id="home-water-me-button" class="button text">Water Me</button>
+					<button id="home-view-history-button" class="button text">View History</button>
+					<button id="home-about-me-button" class="button text">About Me</button>
+					<button id="home-get-updates-button" class="button text">Get Updates</button>
+				</div>
 			</div>
-			<div id="dashboard-top-right">
-				<button id="water-me-button" class="button text">Water Me</button>
-				<button id="view-history-button" class="button text">View History</button>
-				<button id="about-me-button" class="button text">About Me</button>
-				<button id="get-updates-button" class="button text">Get Updates</button>
-			</div>
-			<div id="dashboard-bottom">
-				<button id="about-me-back-button" class="button text hidden">&lt; Back</button>
-				<button id="about-me-next-button" class="button text hidden">Next &gt;</button>
-				<button id="about-me-return-button" class="button text hidden">Return &gt;</button>
+			<div id="dashboard-aboutme-page1" class="hidden">
+				<div id="dashboard-title" class="text">Who am I?</div>
+				<div id="plant-description" class="text">People also call me Swiss Cheese plane 🧀. Walk around and view me in 3D!</div>
+				<button id="aboutme-page1-back-button" class="button text">&lt; Back</button>
+				<button id="aboutme-page1-next-button" class="button text">Next &gt;</button>
+			</div>	
+			<div id="dashboard-aboutme-page2" class="hidden">
+				<div id="dashboard-title" class="text">[about me page 2]</div>
+				<button id="aboutme-page2-back-button" class="button text">&lt; Back</button>
+				<button id="aboutme-page2-return-button" class="button text">Return &gt;</button>
 			</div>	
 		</div>
 	</body>

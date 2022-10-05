@@ -12,16 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		mockWithImage("../assets/mock-videos/kp-vertical.png");
     /* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
 		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
-		const dashboardHomeTitle = "How am I feeling today?";
-		const dashboardAboutMeTitle = "Who am I?";
-		const plantDescription = "People also call me Swiss Cheese plane 🧀. Walk around and view me in 3D!";
-
-		document.getElementById("dashboard-title").innerHTML = dashboardHomeTitle;
-
-		// Initialize home dashboard
-		function intializeHomeDashboard() {
-			document.getElementById("dashboard-title").innerHTML = dashboardHomeTitle;
-		};
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
 		const mindarThree = new window.MINDAR.IMAGE.MindARThree({
@@ -59,49 +49,53 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Start MindAR engine
 		await mindarThree.start();
 
-		// Add event listeners for home dashboard button
-		const waterMeButton = document.getElementById("water-me-button");
-			waterMeButton.addEventListener("click", () => {
-				console.log("water me button clicked");
-				/* document.getElementById("dashboard").style.color = "purple"; */
-				document.getElementById("dashboard-title").style.visibility = "hidden";
+		// Add event listeners for dashboard-home-button
+		document.getElementById("home-water-me-button").addEventListener("click", () => {
+				console.log("home water me button clicked");
 			});
 
-		const viewHistoryButton = document.getElementById("view-history-button");
-		viewHistoryButton.addEventListener("click", () => {
-			console.log("view history button clicked");
+		document.getElementById("home-view-history-button").addEventListener("click", () => {
+			console.log("home view history button clicked");
 		});
 
-		const aboutMeButton = document.getElementById("about-me-button");
-		aboutMeButton.addEventListener("click", () => {
-			console.log("about me button clicked");
+		document.getElementById("home-about-me-button").addEventListener("click", () => {
+			console.log("home about me button clicked");
 			// Change dashboard content
-			document.getElementById("dashboard-title").innerHTML = dashboardAboutMeTitle;
-			document.getElementById("water-cup").classList.add("hidden");
-			document.getElementById("humidity-reading").classList.add("hidden");
-			document.getElementById("plant-description").classList.remove("hidden");
-			document.getElementById("plant-description").innerHTML = plantDescription;
-			document.getElementById("about-me-back-button").classList.remove("hidden");
-			document.getElementById("about-me-next-button").classList.remove("hidden");
-			document.getElementById("dashboard-top-right").classList.add("hidden");
+			document.getElementById("dashboard-home").classList.add("hidden");
+			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
 			// Render gltf model
 			plantGLTF.scene.children[0].visible = true;
 		});
 
-		const getUpdatesButton = document.getElementById("get-updates-button");
-		getUpdatesButton.addEventListener("click", () => {
-			console.log("get updates button clicked");
+		document.getElementById("home-get-updates-button").addEventListener("click", () => {
+			console.log("home get updates button clicked");
 		});
 
-		const aboutMeBackButton = document.getElementById("about-me-back-button");
-		aboutMeBackButton.addEventListener("click", () => {
-			console.log("about me back button clicked");
-			document.getElementById("dashboard-top-right").classList.remove("hidden");
-			document.getElementById("dashboard-bottom").classList.add("hidden");
-			document.getElementById("water-cup").classList.remove("hidden");
-			document.getElementById("humidity-reading").classList.remove("hidden");
-			document.getElementById("plant-description").classList.add("hidden");
+		document.getElementById("aboutme-page1-back-button").addEventListener("click", () => {
+			console.log("about me page1 back button clicked");
+			document.getElementById("dashboard-home").classList.remove("hidden");
+			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
 			plantGLTF.scene.children[0].visible = false;
+		});
+
+		document.getElementById("aboutme-page1-next-button").addEventListener("click", () => {
+			console.log("about me page1 next button clicked");
+			document.getElementById("dashboard-aboutme-page2").classList.remove("hidden");
+			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
+			plantGLTF.scene.children[0].visible = false;
+		});
+
+		document.getElementById("aboutme-page2-back-button").addEventListener("click", () => {
+			console.log("about me page2 back button clicked");
+			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
+			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
+			plantGLTF.scene.children[0].visible = true;
+		});
+
+		document.getElementById("aboutme-page2-return-button").addEventListener("click", () => {
+			console.log("about me page2 return button clicked");
+			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
+			document.getElementById("dashboard-home").classList.remove("hidden");
 		});
 
 		// Start renderer loop to (re)render content for every video frame
