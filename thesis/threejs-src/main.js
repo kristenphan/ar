@@ -4,36 +4,13 @@ import { mockWithImage, mockWithVideo } from "../libs/camera-mock.js";
 import { loadGLTF,loadTexture } from "../libs/loader.js";
 const THREE = window.MINDAR.IMAGE.THREE;
 
-// Create createYoutube() using YT iframe api
-// https://developers.google.com/youtube/iframe_api_reference
-const createYoutube = (videoId) => {
-  return new Promise((resolve, reject) => {
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    const onYouTubeIframeAPIReady = () => {
-      const player = new YT.Player('player', {
-        videoId: videoId,
-        events: {
-          onReady: () => {
-            resolve(player);
-          }
-	      }
-      });
-    }
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-  });
-}
-
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
   const start = async() => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
 		/* mockWithImage("../assets/mock-videos/kp-vertical.png"); */
-    /* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
+    mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
 		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
