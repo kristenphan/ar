@@ -66,6 +66,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		const anchor = mindarThree.addAnchor(0);
 		anchor.group.add(plantGLTF.scene); // causing error
 
+		// Create a CSS3DObject to stream a Youtube video
+		// ytVideoCSS3DObject.type = Object3D
+		const ytVideoId = '0CvjNNCv5_s';
+		const player = await createYoutube(ytVideoId); // player will replace <div id=player>
+		console.log('player = ', player);
+		const ytVideoCSS3DObject = new CSS3DObject(document.getElementById("yt-video"));
+		// ytVideoCSS3DObject.position = [0,0,2] but still not clickable.
+		// Using .onTargetFound(player.playVideo()) will auto play but still not clickable
+		ytVideoCSS3DObject.position.set(0, 0, 2); // TODO: DOES POSITION(0,0,0) MAKE OBJ NOT CLICKABLE? IF NOT, REMOVE THIS
+		ytVideoCSS3DObject.visible = false;
+		cssAnchor.group.add(ytVideoCSS3DObject);
+
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-water-me-button").addEventListener("click", () => {
 				console.log("home water me button clicked");
@@ -102,7 +114,8 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
 			document.getElementById("dashboard").style.height = "900px";
 			plantGLTF.scene.children[0].visible = false;
-			/* ytVideoCSS3DObject.visible = true; */
+			ytVideoCSS3DObject.visible = true;
+			console.log('ytVideoCSS3DObject = ', ytVideoCSS3DObject);
 		});
 
 		document.getElementById("aboutme-page2-back-button").addEventListener("click", () => {
@@ -111,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
 			plantGLTF.scene.children[0].visible = true;
-			/* ytVideoCSS3DObject.visible = false; */
+			ytVideoCSS3DObject.visible = false;
 		});
 
 		document.getElementById("aboutme-page2-return-button").addEventListener("click", () => {
@@ -119,10 +132,55 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
 			document.getElementById("dashboard-home").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
-			/* ytVideoCSS3DObject.visible = false; */
+			ytVideoCSS3DObject.visible = false;
 		});
 
-		// Set up a clock
+		// DOES NOT DETECT CLICK! PERHAPS BECAUSE NOT CLICKING ON @BUTTON?
+		/* console.log('document.getElementById("yt-video") = ', document.getElementById("yt-video"));
+		console.log('document.getElementById("player") = ', document.getElementById("player")); */
+		document.getElementById("yt-video").addEventListener("click", () => {
+			console.log('yt-video div clicked!')
+			player.playVideo();
+		});
+
+		// DOES NOT DETECT CLICK!
+		document.getElementById("player").addEventListener("click", () => {
+			console.log('player div clicked!')
+			player.playVideo();
+		});
+
+		// TODO: NOT WORKING - intersects.length() = 0 even though clicking buttons + gltf + video
+		// WHEN CLICKING ON VIDEO, CAN'T GET MOUSE COORDS
+		// WHEN CLICKING ON GLTF, GET MOUSE COORDS BUT INTERSECTS.LENGTH = 0 STILL
+		// WHEN CLICKING EVERYTHING ELSE IE. DASHBOARDCSS3DOBJECT, GET MOUSE COORDS 
+		// Use raycasting to check if user clicks on the video. If yes, play the video
+		// scene.children = 2; cssScene.children = 2 (dashboard, yt-video)
+		// scene.children.type = cssScene.children.type = undefined
+		// scene.isScene = cssScene.isScene = true
+		document.body.addEventListener("click", (e) => {
+			console.log("click recorded!");
+			// Calculate and normalize x- and y-coordinate of a click event e
+			const mouseX = (e.clientX / window.innerWidth) *2 - 1;
+      const mouseY = -1 * ((e.clientY / window.innerHeight) *2 - 1); // Revert y-coord
+      const mouse = new THREE.Vector2(mouseX, mouseY);
+			console.log('mouse = ', mouse);
+			// Check if the click was performed on ytVideoCSS3DObject. If yes, play the video
+			const raycaster = new THREE.Raycaster();
+			raycaster.setFromCamera(mouse, camera);
+			console.log("cssScene.children[0].children = ", cssScene.children[0].children);
+			/* const intersects = raycaster.intersectObjects(scene.children, true); // can detect clicks on gltf */
+			const intersects = raycaster.intersectObjects(cssScene.children, true); // CAN'T DETECT CLICKS ON cssScene
+			console.log('intersects.length = ', intersects.length);
+			if (intersects.length > 0) {
+				for (o of intersects) {
+					if (o === ytVideoCSS3DObject) {
+						player.playVideo();
+					}
+				}
+			};
+		});
+
+    // Set up a clock
 		const clock = new THREE.Clock();
 		// Start MindAR engine
 		await mindarThree.start();
@@ -131,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Update dashboard's and video's position before re-rendering cssScene (dashboard is attached to cssScene)
 			// so that dashboard and video always face towards camera
 			dashboardCSS3DObject.lookAt(camera.position);
+			ytVideoCSS3DObject.lookAt(camera.position);
 
 			// Rotate gltf model continuously around y-axis
 			const delta = clock.getDelta(); // = time in secs since clock.getDelta() was last called

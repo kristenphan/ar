@@ -20,7 +20,7 @@
 					<div id="headline-text" class="text">Hello from Vincent van Grow! 😊</div>
 				</div>
 			</div>
-			<div id="dashboard-home">
+			<div id="dashboard-home" class="hidden">
 				<div id="dashboard-title" class="text">How am I feeling?</div>
 				<img id="water-cup" src="../assets/images/water-low.png" alt="water-cup"/>
 				<div id="humidity-reading" class="text">Humid: 25%</div>
@@ -31,7 +31,7 @@
 					<button id="home-get-updates-button" class="button text">Get Updates</button>
 				</div>
 			</div>
-			<div id="dashboard-aboutme-page1" class="hidden">
+			<div id="dashboard-aboutme-page1" class="">
 				<div id="dashboard-title" class="text">Who am I?</div>
 				<div id="" class="text dashboard-text">People also call me Swiss Cheese plant 🧀. Walk around and view me in 3D!</div>
 				<div class="dashboard-aboutme-page1-buttons">
@@ -41,18 +41,18 @@
 			</div>	
 			<div id="dashboard-aboutme-page2" class="hidden">
 				<div id="dashboard-title" class="text">Who am I?</div>
-				<div id="" class="text dashboard-text">Watch the video for some artworks about me 🎨.</div>
-				<div id="vimeo-video">
-					<iframe src="https://player.vimeo.com/video/399995471?h=a0dd33ac0f&title=0&byline=0&portrait=0"
-								width="640"
-								height="360">
-					</iframe>
-				</div>
+				<div id="" class="text dashboard-text">Watch the video for tips on how to care for me.</div>
+				<!-- This is where div yt-video used to be -->
 				<div class="dashboard-aboutme-page2-buttons">
 					<button id="aboutme-page2-back-button" class="button text dashboard-aboutme-back-button">&lt; Back</button>	
 					<button id="aboutme-page2-return-button" class="button text">Return &gt;</button>
 				</div>
 			</div>	
+		</div>
+		<!-- TODO: want to make 2 CSS3DObjects or only 1? -->
+		<!-- Placeholder for <iframe> to be created by https://developers.google.com/youtube/iframe_api_reference -->
+		<div id="yt-video">
+			<div id="player"></div>
 		</div>
 	</body>
 </html>

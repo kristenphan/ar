@@ -43,7 +43,7 @@
   padding-left: 20px;
 }
 
-#dashboard-home-button {
+#dashboard-home-buttons {
   position: absolute;
   top: 0;
   margin-top: 220px;
@@ -81,10 +81,29 @@
   margin-left: 110px;
 }
 
-#plant-description {
+.dashboard-text {
   font-size: 40px;
   font-weight: regular;
   font-style: italic;
 	padding: 50px;
 }
 
+.dashboard-aboutme-page1-buttons {
+  white-space: nowrap; /** force buttons to stay side by side **/
+  margin-top: 170px;
+  margin-left: 130px;
+}
+
+.dashboard-aboutme-back-button {
+  margin-right: 230px;
+}
+
+.dashboard-aboutme-page2-buttons {
+  white-space: nowrap; /** force buttons to stay side by side **/
+  margin-top: 60px;
+  margin-left: 130px;
+}
+
+#vimeo-video {
+  margin-left: 250px;
+}
