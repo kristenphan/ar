@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
 		/* mockWithImage("../assets/mock-videos/kp-vertical.png"); */
-    mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
+    /* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
 		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
