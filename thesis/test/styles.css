@@ -1,4 +1,4 @@
-html {
+* {
 	font-family: 'Montserrat', sans-serif;
 }
 
@@ -15,6 +15,7 @@ html {
   padding: 40px;
 	border-radius: 20px;
 	/* opacity: 80%; */
+  /* box-shadow: 10px 10px #bbbbbb; */
 }
 
 #dashboard-headline {
@@ -23,48 +24,33 @@ html {
   border-bottom: 4px solid black;
   white-space: nowrap; /** force headline-image and headline-text to stay side by side **/
   padding: 20px;
-  display: flex;
-  align-items: center; /** Vertically aligned headline-image and headline-text **/
 }
 
 #headline-image {
 	height: 70px;
   width: 70px;
+  vertical-align: middle
 }
 
 #headline-text {
 	display: inline-block;
   margin-left: 10px;
+  vertical-align: middle;
 	font-size: 60px;
 	font-weight: bold;
 }
 
 #dashboard-home {
+  position: relative; /** .dashboard-home-buttons positioned relative to dashboard-home **/
   padding-left: 20px;
-}
-
-#dashboard-home-buttons {
-  position: absolute;
-  top: 0;
-  margin-top: 220px;
-  padding-left: 750px;
-}
-
-.button {
-  width: 350px;
-  height: 100px;
-  background: GhostWhite;
-  border: dashed 4px #9f1be5;
-  border-radius: 20px;
-  font-size: 40px;
-  margin-bottom: 20px;
+  /* border: 5px solid gold; */
 }
 
 #dashboard-title {
 	font-size: 50px;
 	font-weight: regular;
-  margin-top: 25px;
-  margin-left: 50px;
+  margin-top: 0.5em;
+  margin-left: 1em;
 }
 
 #water-cup {
@@ -81,6 +67,32 @@ html {
   margin-left: 110px;
 }
 
+/* #dashboard-home-buttons {
+  position: absolute;
+  top: 0;
+  margin-top: 220px;
+  padding-left: 750px;
+} */
+
+#dashboard-home-buttons {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  /* border: 5px solid gold; */
+}
+
+.button {
+  width: 350px;
+  height: 100px;
+  background: GhostWhite;
+  border: dashed 4px #9f1be5;
+  border-radius: 20px;
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
 .dashboard-text {
   font-size: 40px;
   font-weight: regular;
@@ -89,7 +101,8 @@ html {
 }
 
 .dashboard-aboutme-page1-buttons {
-  white-space: nowrap; /** force buttons to stay side by side **/
+  display: flex;
+  flex-flow: row nowrap; /** buttons on the same line **/
   margin-top: 170px;
   margin-left: 130px;
 }
@@ -99,12 +112,12 @@ html {
 }
 
 .dashboard-aboutme-page2-buttons {
-  white-space: nowrap; /** force buttons to stay side by side **/
+  display: flex;
+  flex-flow: row nowrap; /** buttons on the same line **/
   margin-top: 60px;
   margin-left: 130px;
 }
 
 #vimeo-video {
-  position: relative;
-  left: 250px;
+  margin-left: 250px;
 }
