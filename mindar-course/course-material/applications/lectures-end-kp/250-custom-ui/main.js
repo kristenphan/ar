@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Instantiate mindarThree object with the compiled image(s) target
     // Customize ui: uiScanning, uiLoading
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
-      container: document.querySelector("#container"),
+      /* container: document.querySelector("#container"), */
+      container: document.body,
       imageTargetSrc: '../../assets/targets/musicband.mind',
       uiScanning: "#scanning",
       uiLoading: "no"

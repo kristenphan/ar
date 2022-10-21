@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // E.g., there's a 3D object in a scene. this 3D object then contains smaller objects
       // intersects = list of all objects along the hierarchy that the raycaster hits
       const intersects = raycaster.intersectObjects(scene.children, true);
+      console.log('intersects.length = ', intersects.length);
 
       // intersects = sorted by distance from camera; the closest object = intersect[0].object
       // if intersects includes an object of interest ie. object was clicked, play audio
