@@ -1,5 +1,5 @@
-console.log("running db.js");
-
+// https://www.tutorialspoint.com/updating-a-record-in-mysql-using-nodejs
+// INSERT INTO using raw sql
 const mysql = require("mysql");
 const connection = mysql.createConnection({
   host: "localhost",
@@ -12,11 +12,21 @@ const connection = mysql.createConnection({
 connection.connect((error) => {
   if (error) {
     console.log("Error connecting to the MySQL database");
-    console.log("error = ", error);
+    console.log(error);
     return;
   }
   console.log("Connection established successfully");
 });
+
+const sql = "INSERT INTO watering_history(plant_status) VALUES('Good');";
+connection.query(sql, (error, result) => {
+  if (error) {
+    console.log("INSERT INTO failed \n");
+    console.log(error);
+  }
+  console.log(result);
+});
+
 
 connection.end((error) => {
   if (error) {
