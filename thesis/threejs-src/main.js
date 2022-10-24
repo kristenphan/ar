@@ -39,6 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
 		plantGLTF.scene.position.set(0, -1.2, 0);
 		// Make gltf model invisible until "About Me" button on the Home dashboard is clicked
 		plantGLTF.scene.children[0].visible = false;
+		// Mark GLTF model as clickable and with an URL so that a webpage is opened when users click on the model
+		plantGLTF.scene.userData.clickable = true;
+		plantGLTF.scene.userData.URL = "https://liquidstudio.nl/";
 		// Add a MindAr anchor for the first image target idx=0 and add gltf to anchor
 		const anchor = mindarThree.addAnchor(0);
 		anchor.group.add(plantGLTF.scene); // causing error
@@ -114,6 +117,30 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
 			document.getElementById("dashboard-home").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
+		});
+
+		// Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink
+		document.body.addEventListener("click", (e) => {
+			// Calculate and normalize the x- and y-coord of the click event on html document body i.e., the three.js renderer canvas
+			const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+			const mouseY = -1 * ((e.clientY / window.innerHeight) *2 - 1);
+      const mouse = new THREE.Vector2(mouseX, mouseY);
+			// Cast a virtual ray from camera to click event coords and check if this ray intersects with the plant GLTF model
+			const raycaster = new THREE.Raycaster();
+			raycaster.setFromCamera(mouse, camera);
+			const intersects = raycaster.intersectObjects(scene.children, true);
+			console.log("intersects.length = ", intersects.length);
+			if (intersects.length > 0) {
+				let o = intersects[0].object;
+				while (o.parent && !o.userData.clickable) {
+					o = o.parent;
+				}
+				if (o.userData.clickable) {
+					if (o === plantGLTF.scene) {
+						window.open(o.userData.URL);
+					}
+				}
+			}
 		});
 
 		// Set up a clock
