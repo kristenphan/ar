@@ -34,4 +34,3 @@ knex.from('watering_history')
 
 
 
-  
