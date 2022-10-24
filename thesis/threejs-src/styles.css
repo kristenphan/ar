@@ -1,5 +1,6 @@
 html {
 	font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
 }
 
 .hidden {
@@ -72,13 +73,19 @@ html {
   height: 250px;
 	margin-top: 70px;
 	margin-left: 150px;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
 }
 
-#humidity-reading {
+#moisture-reading {
 	font-size: 50px;
 	font-weight: bold;
-  margin-left: 110px;
+  margin-left: 50px;
+}
+
+#moisture-timestamp {
+  font-size: 15px;
+  font-style: italic;
+  margin-left: 130px;
 }
 
 .dashboard-text {
@@ -107,4 +114,20 @@ html {
 #vimeo-video {
   position: relative;
   left: 250px;
+}
+
+form {
+  text-align: left;
+  font-size: 16px;
+}
+
+#button-submit {
+  background-color: #9f1be5;
+  border-radius: 5px;
+  color: white;
+}
+
+#button-return {
+  background-color: lightgray;
+  border-radius: 5px;
 }

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// plantGLTF.scene.children[0].visible = true by default
 		const plantGLTF = await loadGLTF("../assets/models/plant/scene.gltf");
 		plantGLTF.scene.position.set(0, -1.2, 0);
-		// Make gltf model invisible until "About Me" button is clicked
+		// Make gltf model invisible until "About Me" button on the Home dashboard is clicked
 		plantGLTF.scene.children[0].visible = false;
 		// Add a MindAr anchor for the first image target idx=0 and add gltf to anchor
 		const anchor = mindarThree.addAnchor(0);
@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-water-me-button").addEventListener("click", () => {
 				console.log("home water me button clicked");
+				window.location.href = "./water-me.html";
 			});
 
 		document.getElementById("home-view-history-button").addEventListener("click", () => {
@@ -59,11 +60,26 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
 			// Render gltf model
 			plantGLTF.scene.children[0].visible = true;
-			plantGLTF.scene.userData.clickable = true;
 		});
 
 		document.getElementById("home-get-updates-button").addEventListener("click", () => {
 			console.log("home get updates button clicked");
+			// Display updated moisture reading
+			const moisturePercentage = 10; // TODO: replace with real-time data from iot
+			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
+
+			// Display the time when the moisture reading was recorded
+			const moistureTimestamp = "October 31st, 2022, 8:00 AM"; // TODO: replace with real-time timestamp from iot
+			document.getElementById("moisture-timestamp").innerHTML = `Last update: ${moistureTimestamp}`; 
+
+			// Update water cup image depending on the moisture reading
+			if (moisturePercentage < 30) {
+				document.getElementById("water-cup").src = "../assets/images/water-low.png";	
+			} else if (moisturePercentage <= 30 && moisturePercentage < 60) {
+				document.getElementById("water-cup").src = "../assets/images/water-medium.png";	
+			} else {
+				document.getElementById("water-cup").src = "../assets/images/water-high.png";
+			}
 		});
 
 		document.getElementById("aboutme-page1-back-button").addEventListener("click", () => {
@@ -79,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
 			document.getElementById("dashboard").style.height = "900px";
 			plantGLTF.scene.children[0].visible = false;
-			/* ytVideoCSS3DObject.visible = true; */
 		});
 
 		document.getElementById("aboutme-page2-back-button").addEventListener("click", () => {
@@ -88,7 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
 			plantGLTF.scene.children[0].visible = true;
-			/* ytVideoCSS3DObject.visible = false; */
 		});
 
 		document.getElementById("aboutme-page2-return-button").addEventListener("click", () => {
@@ -96,7 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
 			document.getElementById("dashboard-home").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
-			/* ytVideoCSS3DObject.visible = false; */
 		});
 
 		// Set up a clock
@@ -105,8 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		await mindarThree.start();
 		// After MindAR engine has started, start renderer's loop to (re)render content for every video frame
 		renderer.setAnimationLoop(() => {
-			// Update dashboard's and video's position before re-rendering cssScene (dashboard is attached to cssScene)
-			// so that dashboard and video always face towards camera
+			// Update dashboard's position before re-rendering cssScene (dashboard is attached to cssScene)
+			// so that dashboard always face towards camera
 			dashboardCSS3DObject.lookAt(camera.position);
 
 			// Rotate gltf model continuously around y-axis
