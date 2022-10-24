@@ -55,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		document.getElementById("home-about-me-button").addEventListener("click", () => {
 			console.log("home about me button clicked");
+			// Resize dashboard
+			document.getElementById("dashboard").style.height = "730px";
+
 			// Change dashboard content
 			document.getElementById("dashboard-home").classList.add("hidden");
 			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
@@ -86,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			console.log("about me page1 back button clicked");
 			document.getElementById("dashboard-home").classList.remove("hidden");
 			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
+			document.getElementById("dashboard").style.height = "700px";
 			plantGLTF.scene.children[0].visible = false;
 		});
 
@@ -93,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			console.log("about me page1 next button clicked");
 			document.getElementById("dashboard-aboutme-page2").classList.remove("hidden");
 			document.getElementById("dashboard-aboutme-page1").classList.add("hidden");
-			document.getElementById("dashboard").style.height = "900px";
+			document.getElementById("dashboard").style.height = "930px";
 			plantGLTF.scene.children[0].visible = false;
 		});
 
@@ -101,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			console.log("about me page2 back button clicked");
 			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
 			document.getElementById("dashboard-aboutme-page1").classList.remove("hidden");
-			document.getElementById("dashboard").style.height = "700px";
+			document.getElementById("dashboard").style.height = "730px";
 			plantGLTF.scene.children[0].visible = true;
 		});
 
