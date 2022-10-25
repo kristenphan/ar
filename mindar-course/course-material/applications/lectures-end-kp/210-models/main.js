@@ -1,9 +1,17 @@
 // Import mockWithImage, mockWithVideo for testing
 import {mockWithVideo, mockWithImage} from '../../libs/camera-mock.js';
-// Import a GLTF loader helper function which makes use of GLTFLoader.js
-import {loadGLTF} from '../../libs/loader.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js';
 // three.js is a dependency of mindar-image-three.prod.js
 const THREE = window.MINDAR.IMAGE.THREE;
+
+function loadGLTF(path) {
+  return new Promise((resolve, reject) => {
+    const loader = new GLTFLoader();
+    loader.load(path, (gltf) => {
+      resolve(gltf);
+    });
+  });
+}
 
 // Load .js after html doc has loaded 
 document.addEventListener('DOMContentLoaded', () => {

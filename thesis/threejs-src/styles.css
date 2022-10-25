@@ -15,6 +15,7 @@ html {
   border: 5px solid;
   padding: 40px;
 	border-radius: 20px;
+  position: relative;
 	/* opacity: 80%; */
 }
 
@@ -26,6 +27,15 @@ html {
   padding: 20px;
   display: flex;
   align-items: center; /** Vertically aligned headline-image and headline-text **/
+}
+
+#dashboard-footer {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
 }
 
 #headline-image {

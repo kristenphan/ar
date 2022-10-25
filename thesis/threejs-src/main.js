@@ -1,11 +1,23 @@
 // TODO: replace CSS3DRender.js with CDN link
 import { CSS3DObject } from "../../mindar-course/course-material/applications/libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js";
 import { mockWithImage, mockWithVideo } from "../libs/camera-mock.js";
-import { loadGLTF,loadTexture } from "../libs/loader.js";
+/* import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js'; */
+import { GLTFLoader } from "../libs/three.js-r132/examples/jsm/loaders/GLTFLoader.js";
 const THREE = window.MINDAR.IMAGE.THREE;
+
+// Call GLFTLoader.js to load a gltf model and return a Promise
+function loadGLTF(path) {
+  return new Promise((resolve, reject) => {
+    const loader = new GLTFLoader();
+    loader.load(path, (gltf) => {
+      resolve(gltf);
+    });
+  });
+}
 
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
+	console.log("dom loaded");
   const start = async() => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
@@ -119,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard").style.height = "700px";
 		});
 
-		// Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink
+		/* // Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink
 		document.body.addEventListener("click", (e) => {
 			// Calculate and normalize the x- and y-coord of the click event on html document body i.e., the three.js renderer canvas
 			const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -141,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				}
 			}
-		});
+		}); */
 
 		// Set up a clock
 		const clock = new THREE.Clock();

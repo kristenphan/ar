@@ -2,9 +2,18 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- TODO: replace /libs with CDN file after figuring out why CDN file throws error when loading gltf -->
-		<!-- <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-three.prod.js"></script> -->
-		<script src="../libs/mindar/mindar-image-three.prod.js"></script>
+		<!-- mindar-image-three-prod.js@1.1.5 has three.js@0.136.0 as dependency -->
+		<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-three.prod.js"></script>
+		<!-- IMPORT THRU IMPORT MAP REALLY SLOWS > CAN'T CLICK ON DASHBOARD AT ALL SINCE IT TAKES SO LONG FOR MINDAR ENGINE TO BOOT -->
+		<!-- Import three which must match mindar's three dependency (i.e., three@0.136.0) in order for loader.js and GLTFLoader.js to work -->
+		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.136.0/build/three.module.js"
+        }
+      }
+    </script>
 		<script src="./main.js" type="module"></script>
 		<link rel="stylesheet" href="./styles.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +29,11 @@
 					<img id="headline-image" src="../assets/images/acn.png" alt="acn-logo"/>
 					<div id="headline-text">Hello from Vincent van Grow! 👋</div>
 				</div>
+			</div>
+			<div id="dashboard-footer">Powered by 
+				<a href="https://liquidstudio.nl/">
+					<img id ="ls-logo" alt="Liquid Studio NL logo" src="../assets/images/ls-nl.PNG" width="102" height="50">
+				</a>
 			</div>
 			<div id="dashboard-home">
 				<div id="dashboard-title">How am I feeling?</div>
