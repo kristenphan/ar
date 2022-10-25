@@ -17,7 +17,6 @@ function loadGLTF(path) {
 
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
-	console.log("dom loaded");
   const start = async() => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
@@ -59,16 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		anchor.group.add(plantGLTF.scene); // causing error
 
 		// Add event listeners for dashboard-home-button
-		document.getElementById("home-water-me-button").addEventListener("click", () => {
+		document.getElementById("home-waterme-button").addEventListener("click", () => {
 				console.log("home water me button clicked");
 				window.location.href = "./water-me.html";
 			});
 
-		document.getElementById("home-view-history-button").addEventListener("click", () => {
+		document.getElementById("home-viewhistory-button").addEventListener("click", () => {
 			console.log("home view history button clicked");
+			document.getElementById("dashboard-home").classList.add("hidden");
+			document.getElementById("dashboard-viewhistory").classList.remove("hidden");
 		});
 
-		document.getElementById("home-about-me-button").addEventListener("click", () => {
+		document.getElementById("home-aboutme-button").addEventListener("click", () => {
 			console.log("home about me button clicked");
 			// Resize dashboard
 			document.getElementById("dashboard").style.height = "730px";
@@ -80,14 +81,14 @@ document.addEventListener("DOMContentLoaded", () => {
 			plantGLTF.scene.children[0].visible = true;
 		});
 
-		document.getElementById("home-get-updates-button").addEventListener("click", () => {
+		document.getElementById("home-getupdates-button").addEventListener("click", () => {
 			console.log("home get updates button clicked");
 			// Display updated moisture reading
 			const moisturePercentage = 10; // TODO: replace with real-time data from iot
 			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
 
 			// Display the time when the moisture reading was recorded
-			const moistureTimestamp = "October 31st, 2022, 8:00 AM"; // TODO: replace with real-time timestamp from iot
+			const moistureTimestamp = "31/10/22 8:00 AM"; // TODO: replace with real-time timestamp from iot
 			document.getElementById("moisture-timestamp").innerHTML = `Last update: ${moistureTimestamp}`; 
 
 			// Update water cup image depending on the moisture reading
@@ -129,6 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-aboutme-page2").classList.add("hidden");
 			document.getElementById("dashboard-home").classList.remove("hidden");
 			document.getElementById("dashboard").style.height = "700px";
+		});
+
+		document.getElementById("viewhistory-return-button").addEventListener("click", () => {
+			console.log("view history return button clicked");
+			document.getElementById("dashboard-viewhistory").classList.add("hidden");
+			document.getElementById("dashboard-home").classList.remove("hidden");
 		});
 
 		/* // Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink

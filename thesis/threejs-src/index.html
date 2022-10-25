@@ -6,14 +6,14 @@
 		<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-three.prod.js"></script>
 		<!-- IMPORT THRU IMPORT MAP REALLY SLOWS > CAN'T CLICK ON DASHBOARD AT ALL SINCE IT TAKES SO LONG FOR MINDAR ENGINE TO BOOT -->
 		<!-- Import three which must match mindar's three dependency (i.e., three@0.136.0) in order for loader.js and GLTFLoader.js to work -->
-		<script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+		<!-- <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
     <script type="importmap">
       {
         "imports": {
           "three": "https://unpkg.com/three@0.136.0/build/three.module.js"
         }
       }
-    </script>
+    </script> -->
 		<script src="./main.js" type="module"></script>
 		<link rel="stylesheet" href="./styles.css">
 		<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<div id="dashboard">
-			<div id="dashboard-skeleton">
+			<div id="dashboard-header">
 				<div id="dashboard-headline">
 					<img id="headline-image" src="../assets/images/acn.png" alt="acn-logo"/>
 					<div id="headline-text">Hello from Vincent van Grow! 👋</div>
@@ -32,23 +32,23 @@
 			</div>
 			<div id="dashboard-footer">Powered by 
 				<a href="https://liquidstudio.nl/">
-					<img id ="ls-logo" alt="Liquid Studio NL logo" src="../assets/images/ls-nl.PNG" width="102" height="50">
+					<img id ="ls-logo" src="../assets/images/ls-nl.PNG" alt="liquid-studio-logo" width="102" height="50">
 				</a>
 			</div>
 			<div id="dashboard-home">
-				<div id="dashboard-title">How am I feeling?</div>
+				<div class="dashboard-title">How am I feeling?</div>
 				<img id="water-cup" src="../assets/images/water-high.png" alt="water-cup"/>
 				<div id="moisture-reading">Soil moisture: </div>
 				<div id="moisture-timestamp">Last update: </div>
 				<div id="dashboard-home-buttons">
-					<button id="home-water-me-button" class="button">Water Me</button>
-					<button id="home-view-history-button" class="button">View History</button>
-					<button id="home-about-me-button" class="button">About Me</button>
-					<button id="home-get-updates-button" class="button">Get Updates</button>
+					<button id="home-waterme-button" class="button">Water Me</button>
+					<button id="home-viewhistory-button" class="button">View History</button>
+					<button id="home-aboutme-button" class="button">About Me</button>
+					<button id="home-getupdates-button" class="button">Get Updates</button>
 				</div>
 			</div>
 			<div id="dashboard-aboutme-page1" class="hidden">
-				<div id="dashboard-title">Who am I?</div>
+				<div class="dashboard-title">Who am I?</div>
 				<div id="" class="dashboard-text">People also call me Swiss Cheese plant 🧀. Walk around and view me in 3D!</div>
 				<div class="dashboard-aboutme-page1-buttons">
 					<button id="aboutme-page1-back-button" class="button dashboard-aboutme-back-button">&lt; Back</button>
@@ -56,7 +56,7 @@
 				</div>
 			</div>	
 			<div id="dashboard-aboutme-page2" class="hidden">
-				<div id="dashboard-title">Who am I?</div>
+				<div class="dashboard-title">Who am I?</div>
 				<div id="" class="dashboard-text">Watch the video for some artworks about me 🎨.</div>
 				<div id="vimeo-video">
 					<iframe src="https://player.vimeo.com/video/399995471?h=a0dd33ac0f&title=0&byline=0&portrait=0"
@@ -68,6 +68,25 @@
 					<button id="aboutme-page2-back-button" class="button dashboard-aboutme-back-button">&lt; Back</button>	
 					<button id="aboutme-page2-return-button" class="button">Return &gt;</button>
 				</div>
+			</div>
+			<div id="dashboard-viewhistory" class="hidden">
+				<div class="dashboard-title">When was I last watered?</div>
+				<div class="watering-record">
+					<img id="status1" class="status-icon thumb-down" src="../assets/images/thumb-down.png" alt="plant-status"/>
+					<div id="record1">[Status "Not good" @ 30/10/22 8:00]</div>
+				</div>
+				<div class="watering-record">
+					<img id="status2" class="status-icon thumb-up" src="../assets/images/thumb-up.png" alt="plant-status"/>
+					<div id="record2">[Status "Good" @ 30/10/22 12:00]</div>
+				</div>
+				<div class="watering-record">
+					<img id="status3" class="status-icon thumb-up" src="../assets/images/thumb-up.png" alt="plant-status"/>
+					<div id="record3">[Status "Good" @ 30/10/22 17:00]</div>
+				</div>
+				<div id="watering-history-timestamp">[Last update: 30/10/22 18:00]</div>
+				<div class="dashboard-viewhistory-buttons">
+					<button id="viewhistory-return-button" class="button">Return &gt;</button>
+				</div>	
 			</div>	
 		</div>
 	</body>
