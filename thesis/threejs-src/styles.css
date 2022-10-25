@@ -19,7 +19,7 @@ html {
 	/* opacity: 80%; */
 }
 
-#dashboard-headline {
+#dashboard-header {
   width: 1150px;
   margin-bottom: 30px;
   border-bottom: 4px solid black;
@@ -34,7 +34,7 @@ html {
   bottom: 10px;
   right: 50px;
   display: flex;
-  align-items: center;
+  align-items: center; /** Vertically aligned text "Powered by" and ls-logo **/
   font-size: 15px;
 }
 
@@ -71,7 +71,7 @@ html {
   margin-bottom: 20px;
 }
 
-#dashboard-title {
+.dashboard-title {
 	font-size: 50px;
 	font-weight: regular;
   margin-top: 25px;
@@ -121,6 +121,12 @@ html {
   margin-left: 130px;
 }
 
+.dashboard-viewhistory-buttons {
+  position: absolute;
+  bottom: 50px; 
+  right: 180px;
+}
+
 #vimeo-video {
   position: relative;
   left: 250px;
@@ -140,4 +146,33 @@ form {
 #button-return {
   background-color: lightgray;
   border-radius: 5px;
+}
+
+.watering-record {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin:30px 50px 30px 150px;
+  font-size: 40px;
+}
+
+.status-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.thumb-down {
+  border: solid 3px black;
+}
+
+.thumb-up {
+  border: solid 3px #9f1be5;
+}
+
+#watering-history-timestamp {
+  font-size: 15px;
+  font-style: italic;
+  margin-left: 150px;
 }
