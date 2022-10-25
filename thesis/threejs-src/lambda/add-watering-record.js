@@ -1,5 +1,6 @@
 const Knex = require("knex");
 
+// TODO Get plantStatus from html form
 const plantStatus = "Good";
 
 // Connect to mysql database using knex.js query builder
