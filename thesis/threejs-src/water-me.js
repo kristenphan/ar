@@ -1,24 +1,21 @@
-// Wait until html finishes loading
+// Wait until html finishes loading, 
+// then invoke a lambda function to write a new watering record in backend database
 document.addEventListener("DOMContentLoaded", () => {
   // If button Submit is clicked, add a new watering record to backend database
   document.getElementById("button-submit").addEventListener("click", () => {
     console.log("water me button submit clicked");
     
     // Obtain the plant status and write it to a database
+    // Radio button "Good" is checked by default
     const radioButtonGroup = document.getElementsByName("plant-status");
     const checkedRadio = Array.from(radioButtonGroup).find((radio) => radio.checked);
-    if (checkedRadio !== undefined) {
-      alert("radio = ", checkedRadio.value); // TODO: not showing checkRadio.value
-      console.log("radio = ", checkedRadio.value);
+    const plantStatus = checkedRadio.value;
 
-      // TODO: Call lambda function to write to database
+    // TODO: Call to lambda to write a new watering record to database
+    const plantId = 1;
+    alert("plantId = " + plantId + "; plantStatus = " + plantStatus);
 
-      // Return to Main Dashboard
-      //window.location.href = "./index.html"; // not working
-      //window.location.replace("./index.html"); // not working either
-    }
-    else { // If no radio button clicked
-      alert("Please answer the question(s) before clicking 'Submit'.");
-    }
+    // Return to main dashboard
+    window.location.href = "./index.html";
   });
 });
