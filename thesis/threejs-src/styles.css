@@ -35,7 +35,7 @@ html {
   right: 50px;
   display: flex;
   align-items: center; /** Vertically aligned text "Powered by" and ls-logo **/
-  font-size: 15px;
+  font-size: 20px;
 }
 
 #headline-image {
@@ -93,9 +93,9 @@ html {
 }
 
 #moisture-timestamp {
-  font-size: 15px;
+  font-size: 25px;
   font-style: italic;
-  margin-left: 130px;
+  margin-left: 75px;
 }
 
 .dashboard-text {
