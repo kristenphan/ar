@@ -141,13 +141,13 @@ form {
   background-color: #9f1be5;
   border-radius: 5px;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 #button-return {
   background-color: lightgray;
   border-radius: 5px;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .watering-record {
