@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-waterme-button").addEventListener("click", () => {
 				console.log("home water me button clicked");
-				window.location.href = "../water-me.html";
+				window.location.href = "../waterme.html";
 			});
 
 		document.getElementById("home-viewhistory-button").addEventListener("click", () => {
