@@ -1,9 +1,7 @@
-// TODO: replace CSS3DRender.js with CDN link
-import { CSS3DObject } from "../../mindar-course/course-material/applications/libs/three.js-r132/examples/jsm/renderers/CSS3DRenderer.js";
-import { mockWithImage, mockWithVideo } from "../libs/camera-mock.js";
-/* import { GLTFLoader } from 'https://unpkg.com/three@0.136.0/examples/jsm/loaders/GLTFLoader.js'; */
-import { GLTFLoader } from "../libs/three.js-r132/examples/jsm/loaders/GLTFLoader.js";
-const THREE = window.MINDAR.IMAGE.THREE;
+import { mockWithImage, mockWithVideo } from "../assets/libs/camera-mock";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer";
+import * as THREE from "three";
 
 // Call GLFTLoader.js to load a gltf model and return a Promise
 function loadGLTF(path) {
@@ -60,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-waterme-button").addEventListener("click", () => {
 				console.log("home water me button clicked");
-				window.location.href = "./water-me.html";
+				window.location.href = "../water-me.html";
 			});
 
 		document.getElementById("home-viewhistory-button").addEventListener("click", () => {
@@ -138,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			document.getElementById("dashboard-home").classList.remove("hidden");
 		});
 
-		/* // Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink
+		// Use raycasting to check if GLTF model is clicked. If yes, open a webpage from a hyperlink
 		document.body.addEventListener("click", (e) => {
 			// Calculate and normalize the x- and y-coord of the click event on html document body i.e., the three.js renderer canvas
 			const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
@@ -160,7 +158,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				}
 			}
-		}); */
+		});
 
 		// Set up a clock
 		const clock = new THREE.Clock();
