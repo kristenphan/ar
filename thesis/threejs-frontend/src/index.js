@@ -1,17 +1,7 @@
 import { mockWithImage, mockWithVideo } from "../assets/libs/camera-mock";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { loadGLTF } from "../assets/libs/loader";
 import { CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer";
 import * as THREE from "three";
-
-// Call GLFTLoader.js to load a gltf model and return a Promise
-function loadGLTF(path) {
-  return new Promise((resolve, reject) => {
-    const loader = new GLTFLoader();
-    loader.load(path, (gltf) => {
-      resolve(gltf);
-    });
-  });
-}
 
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
