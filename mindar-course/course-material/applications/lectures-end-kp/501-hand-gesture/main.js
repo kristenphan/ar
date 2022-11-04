@@ -108,20 +108,20 @@ document.addEventListener('DOMContentLoaded', () => {
     mixer.addEventListener('finished', () => {
       fadeToAction(idleAction, 0.2);
     });
-
     // Get camera stream
     const cameraStream = mindarThree.video;
-    // Detect hand in camera stream. Estimate gestures of detected hand. Play actions accordingly
+    // Detect hand in camera stream. Estimate gestures of detected hand. Displaye
     let skipCount = 0;
     // Create detect() to recursively call window.requestAnimationFrame(detect) 
     // to detect hand gestures and play corresponding animations
     const detect = async () => {
-      // If the current action is not idleAction, skip trying to detect hands
+      /* // If the current action is not idleAction, skip trying to detect hands
       // so that the current action can play out in its entirety
       if (activeAction !== idleAction) {
         window.requestAnimationFrame(detect);
         return;
-      };
+      }; */
+			
       // Use skipCount to skip detecting hands, which is an expensive operation, in #skipCount of video frames 
       if (skipCount < 10) {
         skipCount += 1;
