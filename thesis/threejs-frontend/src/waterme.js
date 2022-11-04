@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // TODO: Call to lambda to write a new watering record to database
     const plantId = 1;
-    alert("plantId = " + plantId + "; plantStatus = " + plantStatus);
+    alert("Recorded html form: plantId = " + plantId + "; plantStatus = " + plantStatus);
 
     // Return to main dashboard
     window.location.href = "./index.html";
