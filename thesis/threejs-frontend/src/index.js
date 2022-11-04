@@ -9,13 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
 		/* mockWithImage("../assets/mock-videos/kp-vertical.png"); */
-    mockWithVideo("../assets/mock-videos/kp-horizontal.mp4");
+    /* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
 		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
 		const mindarThree = new window.MINDAR.IMAGE.MindARThree({
 			container: document.body, // size of three.js renderer <canvas>
-			imageTargetSrc: "../assets/targets/kp.mind", // compiled image target
+			/* imageTargetSrc: "../assets/targets/kp.mind", */ // compiled image target
+			imageTargetSrc: "../assets/targets/ls.mind",
 		});
 		const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
 		// Add light to scene to "light up" GLTF model. Otherwise, model will be completely dark
