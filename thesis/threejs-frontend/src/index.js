@@ -151,6 +151,24 @@ document.addEventListener("DOMContentLoaded", () => {
 			}
 		});
 
+		// Load handpose tensowflow model
+		const model = await handpose.load();
+		// Define "👎" gesture. "👍" gesture is pre-defined by fingerpose fp
+		const thumbsDownGesture = new fp.GestureDescription('thumbs_down');
+
+		thumbsDownGesture.addCurl(fp.Finger.Thumb, fp.FingerCurl.NoCurl);
+		thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.VerticalDown, 1.0);
+		thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownLeft, 0.9);
+		thumbsDownGesture.addDirection(fp.Finger.Thumb, fp.FingerDirection.DiagonalDownRight, 0.9);
+		// do this for all other fingers
+		for(let finger of [fp.Finger.Index, fp.Finger.Middle, fp.Finger.Ring, fp.Finger.Pinky]) {
+			thumbsDownGesture.addCurl(finger, fp.FingerCurl.FullCurl, 1.0);
+			thumbsDownGesture.addCurl(finger, fp.FingerCurl.HalfCurl, 0.9);
+		}
+
+		// Create GestureEstimator GE with the above gestures
+		const GE = new fp.GestureEstimator([fp.Gestures.ThumbsUpGesture, thumbsDownGesture]);
+
 		// Set up a clock
 		const clock = new THREE.Clock();
 		// Start MindAR engine
@@ -169,6 +187,53 @@ document.addEventListener("DOMContentLoaded", () => {
 			renderer.render(scene, camera);
 			cssRenderer.render(cssScene, camera);
 		});
+
+    /* // Get camera stream
+    const cameraStream = mindarThree.video;
+    // Detect hand in camera stream. Estimate gestures of detected hand. Play actions accordingly
+    let skipCount = 0;
+    // Create detect() to recursively call window.requestAnimationFrame(detect) 
+    // to detect hand gestures and play corresponding animations
+    const detect = async () => {
+      // Use skipCount to skip detecting hands, which is an expensive operation, in #skipCount of video frames 
+      if (skipCount < 10) {
+        skipCount += 1;
+        window.requestAnimationFrame(detect);
+        return;
+      }
+      skipCount = 0;
+      // Detect hands using hand pose model + camera stream
+      // "predictions" is an array of objects describing each detected hand
+      // as described here https://github.com/tensorflow/tfjs-models/tree/master/handpose
+      const predictions = await model.estimateHands(cameraStream);
+      // If hand is detected, estimate the gesture using the first hand detected idx=0
+      // using threshold of 7.5 
+      if (predictions.length > 0) {
+        // Estimate the gestures of the detected hand with threshold of 7.5 
+        // 10 = highest confidence for an estimated gesture
+        const estimatedGestures = GE.estimate(predictions[0].landmarks, 8)
+        // Find the best gesture based on estimated score
+        if (estimatedGestures.gestures.length > 0) {
+          const best = estimatedGestures.gestures.sort((g1, g2) => g2.confidence - g1.confidence)[0];
+          // Play the animation according to the detected gesture with fade-in effect
+          if (best.name === 'thumbs_up') {
+            alert("Recorded thumbs-up: plantId = 1; plantStatus = 'Good'.");
+						setTimeout(() => {
+							console.log("Delayed for 0.5 sec.");
+						}, "500");
+          }
+					if (best.name === 'thumbs_down') {
+            alert("Recorded thumbs-down: plantId = 1; plantStatus = 'Not good'.");
+						setTimeout(() => {
+							console.log("Delayed for 0.5 sec.");
+						}, "500");
+	
+          }
+        }
+      }
+      window.requestAnimationFrame(detect);
+    };
+    window.requestAnimationFrame(detect); */
 	};
 	start();
 });
