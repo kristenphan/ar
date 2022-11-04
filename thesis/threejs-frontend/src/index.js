@@ -73,11 +73,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.getElementById("home-getupdates-button").addEventListener("click", () => {
 			console.log("home get updates button clicked");
 			// Display updated moisture reading
-			const moisturePercentage = 10; // TODO: replace with real-time data from iot
+			const moisturePercentage = "[10]"; // TODO: replace with real-time data from iot
 			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
 
 			// Display the time when the moisture reading was recorded
-			const moistureTimestamp = "31/10/22 8:00 AM"; // TODO: replace with real-time timestamp from iot
+			const moistureTimestamp = "[31/10/22 8:00 AM]"; // TODO: replace with real-time timestamp from iot
 			document.getElementById("moisture-timestamp").innerHTML = `Last update: ${moistureTimestamp}`; 
 
 			// Update water cup image depending on the moisture reading
