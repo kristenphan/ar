@@ -188,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			cssRenderer.render(cssScene, camera);
 		});
 
-    /* // Get camera stream
+    // Get camera stream
     const cameraStream = mindarThree.video;
     // Detect hand in camera stream. Estimate gestures of detected hand. Play actions accordingly
     let skipCount = 0;
@@ -233,7 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       window.requestAnimationFrame(detect);
     };
-    window.requestAnimationFrame(detect); */
+    window.requestAnimationFrame(detect);
 	};
 	start();
 });
