@@ -10,12 +10,11 @@
 #define AOUT_PIN 36
 
 // Define IoT publish topic and port
-#define AWS_IOT_PUBLISH_TOPIC "webar-iottopic-sensordata"
+#define AWS_IOT_PUBLISH_TOPIC "webar-iottopic-plantId.1.sensordata"
 #define AWS_IOT_PORT 8883 // for MQTTS
 
 // Define sensor id and id of the plant the sensor is associated with
 #define SENSOR_ID 1
-#define PLANT_ID 1
 
 unsigned long epochTimestamp;
 int moistureValue;
@@ -76,8 +75,7 @@ void publishMessage() {
   StaticJsonDocument<200> doc;
   doc["sensorId"] = SENSOR_ID;
   doc["timestamp"] = epochTimestamp;
-  doc["plantId"] = PLANT_ID;
-  doc["moisturePercentage"] = moisturePercentage;
+  doc["sensorValue"] = moisturePercentage;
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer); // print to client
  
@@ -124,8 +122,6 @@ void loop() {
   Serial.println(SENSOR_ID);
   Serial.print("timestamp = ");
   Serial.println(epochTimestamp);
-  Serial.print("plantId = ");
-  Serial.println(PLANT_ID);
   Serial.print("Moisture percentage (%): ");
   Serial.println(moisturePercentage);
   Serial.print("Moisture value: ");
