@@ -3,17 +3,21 @@
 #include <PubSubClient.h>
 #include <ArduinoJson.h>
 #include "WiFi.h"
+#include <NTPClient.h> 
+#include <WiFiUdp.h>
  
 // ESP32 pin number (36) which connects to AOUT pin of moisture sensor
 #define AOUT_PIN 36
 
 // Define IoT publish topic and port
-#define AWS_IOT_PUBLISH_TOPIC "webar-soilmoisture"
+#define AWS_IOT_PUBLISH_TOPIC "webar-iottopic-sensordata"
 #define AWS_IOT_PORT 8883 // for MQTTS
 
-// Define the id of the plant the sensor is associated with
+// Define sensor id and id of the plant the sensor is associated with
+#define SENSOR_ID 1
 #define PLANT_ID 1
 
+unsigned long epochTimestamp;
 int moistureValue;
 int moisturePercentage;
 
@@ -23,6 +27,10 @@ WiFiClientSecure wifiSecureNetwork = WiFiClientSecure();
 
 // Create a pubsub client which uses WiFi connection with SSL encryption
 PubSubClient pubsubClient(wifiSecureNetwork);
+
+// Define NTP Client which connects to NTP server via UDP to get time
+WiFiUDP ntpUDP;
+NTPClient ntpTimeClient(ntpUDP, "europe.pool.ntp.org");
 
 // Connect to AWS IoT Core using connection credentials 
 void connectAWSIoTCore() {
@@ -66,6 +74,8 @@ void connectAWSIoTCore() {
 // Publish a JSON message to a IoT publish topic  
 void publishMessage() {
   StaticJsonDocument<200> doc;
+  doc["sensorId"] = SENSOR_ID;
+  doc["timestamp"] = epochTimestamp;
   doc["plantId"] = PLANT_ID;
   doc["moisturePercentage"] = moisturePercentage;
   char jsonBuffer[512];
@@ -88,18 +98,38 @@ void setup() {
   // Open serial port with data rate = 115200 bits per sec
   Serial.begin(115200);
   connectAWSIoTCore();
+
+  // Initialize NTP Time Client
+  ntpTimeClient.begin();
+
+  // Get offset time in seconds to adjust for local timezone
+  // Netherlands is UTC-4:00 Hrs: offset = -4 * 60 * 60 = -14400
+  ntpTimeClient.setTimeOffset(-14400);   
 }
  
 void loop() {
+  // Get current date and time from NTP server
+  ntpTimeClient.update();
+
+  // Get epoch timestamp
+  epochTimestamp = ntpTimeClient.getEpochTime();
+
   // Get moisture sensor reading from sensor
   moistureValue = analogRead(AOUT_PIN); 
+  
+  // Calculate moisture percentage
+  moisturePercentage = (4095 - moistureValue) * 100 / 4095; // 4095 as observed is max value for DRY  
+
+  Serial.print("sensorId = ");
+  Serial.println(SENSOR_ID);
+  Serial.print("timestamp = ");
+  Serial.println(epochTimestamp);
+  Serial.print("plantId = ");
+  Serial.println(PLANT_ID);
+  Serial.print("Moisture percentage (%): ");
+  Serial.println(moisturePercentage);
   Serial.print("Moisture value: ");
   Serial.println(moistureValue);
-  // Calculate moisture percentage
-  moisturePercentage = (4095 - moistureValue) * 100 / 4095; // 4095 as observed is max value for DRY
-  Serial.print("Moisture percentage: ");
-  Serial.print(moisturePercentage);
-  Serial.println("%");
 
   // Publish sensor reading to IoT Core every 5 seconds
   publishMessage();
