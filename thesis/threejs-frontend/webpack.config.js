@@ -17,5 +17,17 @@ module.exports = {
   performance: {
     maxEntrypointSize: 1024000,
     maxAssetSize: 1024000
+  },
+  // Configure Babel transpiler to transpile all .js files except for those in node_modules using babel-loader
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
+      }
+    ]
   }
 }
