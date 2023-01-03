@@ -10,10 +10,10 @@
 #define AOUT_PIN 36
 
 // Define IoT publish topic and port
-#define AWS_IOT_PUBLISH_TOPIC "webar-iottopic-plantId.1.sensordata"
+#define AWS_IOT_PUBLISH_TOPIC "webar-iottopic-sensordata"
 #define AWS_IOT_PORT 8883 // for MQTTS
 
-// Define sensor id and id of the plant the sensor is associated with
+// Define sensor id of the sensor the plant the sensor is associated with
 #define SENSOR_ID 1
 
 unsigned long epochTimestamp;
