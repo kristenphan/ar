@@ -2,6 +2,11 @@ import { mockWithImage, mockWithVideo } from "../assets/libs/camera-mock";
 import { loadGLTF } from "../assets/libs/loader";
 import { CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer";
 import * as THREE from "three";
+import getMoistureData from "./getmoisturedata.js";
+import transformTimestamp from "./transformtimestamp.js";
+
+const LambdaFunctionURLSensorDataSelect = "https://hb47qlyvmoqcwgj3vaisi6vgqu0wjkvz.lambda-url.eu-central-1.on.aws/";
+const moistureSensorId = "1";
 
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
 		/* mockWithImage("../assets/mock-videos/kp-vertical.png"); */
-    /* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
+    	/* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
 		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
@@ -21,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const {renderer, cssRenderer, scene, cssScene, camera} = mindarThree;
 		// Add light to scene to "light up" GLTF model. Otherwise, model will be completely dark
 		const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
-    scene.add(light);
+    	scene.add(light);
 
 		// Create a CSS3DObject from a <div> which has "visibility: hidden" css styling 
 		// so that <div> does not show before MindAR camera starts
@@ -48,9 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-waterme-button").addEventListener("click", () => {
-				console.log("home water me button clicked");
-				window.location.href = "../waterme.html";
-			});
+			console.log("home water me button clicked");
+			window.location.href = "../waterme.html";
+		});
 
 		document.getElementById("home-viewhistory-button").addEventListener("click", () => {
 			console.log("home view history button clicked");
@@ -70,14 +75,17 @@ document.addEventListener("DOMContentLoaded", () => {
 			plantGLTF.scene.children[0].visible = true;
 		});
 
-		document.getElementById("home-getupdates-button").addEventListener("click", () => {
+		document.getElementById("home-getupdates-button").addEventListener("click", async () => {
 			console.log("home get updates button clicked");
-			// Display updated moisture reading
-			const moisturePercentage = "10"; // TODO: replace with real-time data from iot
-			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
+			// Invoke lambda function url to retrieve sensor value and timestamp from dynamodb
+			const moistureData = await getMoistureData(LambdaFunctionURLSensorDataSelect, moistureSensorId);
+			const moisturePercentage = moistureData.sensorValue;
+			const moistureTimestamp = transformTimestamp(moistureData.timestamp);
+			console.log("moisturePercentage = ", moisturePercentage);
+			console.log("moistureTimestamp = ", moistureTimestamp);
 
-			// Display the time when the moisture reading was recorded
-			const moistureTimestamp = "10/12/22 08:00"; // TODO: replace with real-time timestamp from iot
+			// Display updated moisture data
+			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
 			document.getElementById("moisture-timestamp").innerHTML = `Last update: ${moistureTimestamp}`; 
 
 			// Update water cup image depending on the moisture reading
@@ -132,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Calculate and normalize the x- and y-coord of the click event on html document body i.e., the three.js renderer canvas
 			const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
 			const mouseY = -1 * ((e.clientY / window.innerHeight) *2 - 1);
-      const mouse = new THREE.Vector2(mouseX, mouseY);
+      		const mouse = new THREE.Vector2(mouseX, mouseY);
 			// Cast a virtual ray from camera to click event coords and check if this ray intersects with the plant GLTF model
 			const raycaster = new THREE.Raycaster();
 			raycaster.setFromCamera(mouse, camera);
@@ -214,21 +222,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const estimatedGestures = GE.estimate(predictions[0].landmarks, 8)
         // Find the best gesture based on estimated score
         if (estimatedGestures.gestures.length > 0) {
-          const best = estimatedGestures.gestures.sort((g1, g2) => g2.confidence - g1.confidence)[0];
-          // Play the animation according to the detected gesture with fade-in effect
-          if (best.name === 'thumbs_up') {
-            alert("Recorded thumbs-up: plantId = 1; plantStatus = 'Good'.");
-						setTimeout(() => {
-							console.log("Delayed for 0.5 sec.");
-						}, "500");
-          }
-					if (best.name === 'thumbs_down') {
-            alert("Recorded thumbs-down: plantId = 1; plantStatus = 'Not good'.");
-						setTimeout(() => {
-							console.log("Delayed for 0.5 sec.");
-						}, "500");
-	
-          }
+          	const best = estimatedGestures.gestures.sort((g1, g2) => g2.confidence - g1.confidence)[0];
+          	// Play the animation according to the detected gesture with fade-in effect
+          	if (best.name === 'thumbs_up') {
+            	alert("Recorded thumbs-up: plantId = 1; plantStatus = 'Good'.");
+				setTimeout(() => {
+					console.log("Delayed for 0.5 sec.");
+					}, "500"
+				);
+    		}
+			if (best.name === 'thumbs_down') {
+            	alert("Recorded thumbs-down: plantId = 1; plantStatus = 'Not good'.");
+				setTimeout(() => {
+					console.log("Delayed for 0.5 sec.");
+					}, "500"
+				);
+          	}
         }
       }
       window.requestAnimationFrame(detect);
