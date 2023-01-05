@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			// Invoke lambda function url to retrieve sensor value and timestamp from dynamodb
 			const moistureData = await getMoistureData(LambdaFunctionURLSensorDataSelect, moistureSensorId);
 			const moisturePercentage = moistureData.sensorValue;
-			const moistureTimestamp = transformTimestamp(moistureData.timestamp);
+			const moistureTimestamp = transformTimestamp(moistureData.timeEpoch);
 			console.log("moisturePercentage = ", moisturePercentage);
 			console.log("moistureTimestamp = ", moistureTimestamp);
 
