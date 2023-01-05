@@ -23,14 +23,15 @@ export const handler = async (event) => {
     try {
         const data = await ddbClient.send(new QueryCommand(params));
         const sensorValue = data.Items[0].sensorValue["N"]; 
-        const timestamp = data.Items[0].timestamp["N"];
+        const timeEpoch = data.Items[0].timeEpoch["N"];
         console.log("Command success!");
         console.log("data.Items = ", data.Items);
+        console.log("event = ", event);
         response = {
             "statusCode": 200,
             "body": JSON.stringify({
                 sensorValue: sensorValue,
-                timestamp: timestamp
+                timeEpoch: timeEpoch
             })
         }
         
