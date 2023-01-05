@@ -16,7 +16,7 @@
 // Define sensor id of the sensor the plant the sensor is associated with
 #define SENSOR_ID 1
 
-unsigned long epochTimestamp;
+unsigned long timeEpoch;
 int moistureValue;
 int moisturePercentage;
 
@@ -74,7 +74,7 @@ void connectAWSIoTCore() {
 void publishMessage() {
   StaticJsonDocument<200> doc;
   doc["sensorId"] = SENSOR_ID;
-  doc["timestamp"] = epochTimestamp;
+  doc["timeEpoch"] = timeEpoch;
   doc["sensorValue"] = moisturePercentage;
   char jsonBuffer[512];
   serializeJson(doc, jsonBuffer); // print to client
@@ -110,7 +110,7 @@ void loop() {
   ntpTimeClient.update();
 
   // Get epoch timestamp
-  epochTimestamp = ntpTimeClient.getEpochTime();
+  timeEpoch = ntpTimeClient.getEpochTime();
 
   // Get moisture sensor reading from sensor
   moistureValue = analogRead(AOUT_PIN); 
@@ -120,8 +120,8 @@ void loop() {
 
   Serial.print("sensorId = ");
   Serial.println(SENSOR_ID);
-  Serial.print("timestamp = ");
-  Serial.println(epochTimestamp);
+  Serial.print("timeEpoch = ");
+  Serial.println(timeEpoch);
   Serial.print("Moisture percentage (%): ");
   Serial.println(moisturePercentage);
   Serial.print("Moisture value: ");
