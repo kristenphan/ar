@@ -1,18 +1,27 @@
 import {DynamoDBClient} from "@aws-sdk/client-dynamodb";
 import {DynamoDBDocumentClient, PutCommand} from "@aws-sdk/lib-dynamodb";
 
+const region = "eu-central-1";
+
+// Return true if function executes successfully. Otherwise, return false
 export const handler = async (event) => {
+    // Extract params from event
+    const body = JSON.parse(event.body);
+    const plantId = body.plantId;
+    const timeEpoch = body.timeEpoch;
+    const plantStatus = body.plantStatus;
+    
     // Create a DynamoDBClient which auto marshalls JSON-like params to DynamoDB JSON
-    const ddbClient = new DynamoDBClient({region: "eu-central-1"});
+    const ddbClient = new DynamoDBClient({region: region});
     const ddbDocClient = DynamoDBDocumentClient.from(ddbClient);
     
     // Create params of PutCommand ie., putItem()
     const params = {
         TableName: "webar-ddb-wateringhistory",
         Item: {
-            "plantId": 1, // partition key type NUMBER
-            "timestamp": Date.now(), // sort key NUMBER
-            "plantStatus": "Not good" // 
+            "plantId": plantId, // partition key type NUMBER
+            "timeEpoch": timeEpoch, // sort key NUMBER
+            "plantStatus": plantStatus 
           }
     };
     
@@ -21,7 +30,9 @@ export const handler = async (event) => {
         const data = await ddbDocClient.send(new PutCommand(params));
         console.log("PutCommand success!");
         console.log("data = ", data);
+        return true;
     } catch (err) {
         console.log("error = ", err.stack);
+        return false;
     }
 };
