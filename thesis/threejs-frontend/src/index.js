@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
 					img.classList.add("thumb-up");
 					img.classList.remove("thumb-down");
 				}
-				else if (plantStatus === "bad") {
+				else if (plantStatus === "not good") {
 					const iconName = "thumb-down";
 					const img = document.getElementById(iconIdTag);
 					img.src = `../assets/images/${iconName}.png`;
@@ -91,11 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				// display the watering records
 				document.getElementById(recordIdTag).innerHTML = `Status ${plantStatus} @ ${timestamp}`;
 			}
-
-			// populate the timestamp for when the history table was last updated
-			const currentTimeEpoch = Math.floor(Date.now() / 1000);
-			const wateringHistoryTimestamp = transformTimestamp(currentTimeEpoch);
-			document.getElementById("watering-history-timestamp").innerHTML = `Last update: ${wateringHistoryTimestamp}`;
 		});
 
 		document.getElementById("home-aboutme-button").addEventListener("click", () => {
