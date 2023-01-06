@@ -2,20 +2,22 @@ import { mockWithImage, mockWithVideo } from "../assets/libs/camera-mock";
 import { loadGLTF } from "../assets/libs/loader";
 import { CSS3DObject} from "three/examples/jsm/renderers/CSS3DRenderer";
 import * as THREE from "three";
-import getMoistureData from "./getmoisturedata.js";
-import transformTimestamp from "./transformtimestamp.js";
+import getMoistureData from "./getmoisturedata";
+import transformTimestamp from "./transformtimestamp";
+import getWateringHistory from "./getwateringhistory";
 
 const LambdaFunctionURLSensorDataSelect = "https://hb47qlyvmoqcwgj3vaisi6vgqu0wjkvz.lambda-url.eu-central-1.on.aws/";
+const LambdaFunctionURLWaterMeSelect = "https://yflctn2rz73tf23fzmwo2wupa40cueyf.lambda-url.eu-central-1.on.aws/";
 const moistureSensorId = "1";
+const plantId = "1";
+const LSURL = "https://liquidstudio.nl/";
 
 // Load .js after html doc has loaded
 document.addEventListener("DOMContentLoaded", () => {
   const start = async() => {
 		// Use mock webcam for testing: mockWithVideo is more stable
 		/* mockWithImage("../assets/mock-videos/kp-horizontal.png"); */
-		/* mockWithImage("../assets/mock-videos/kp-vertical.png"); */
-    	/* mockWithVideo("../assets/mock-videos/kp-horizontal.mp4"); */
-		/* mockWithVideo("../assets/mock-videos/kp-vertical.mp4"); */
+		/* mockWithVideo("../assets/mock-videos/acn-horizontal.mp4"); */
 		
 		// Instantiate MindARThree object which auto instantiates three.js renderder, CSSRenderer, scene, CSSScene, perspective camera
 		const mindarThree = new window.MINDAR.IMAGE.MindARThree({
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		plantGLTF.scene.children[0].visible = false;
 		// Mark GLTF model as clickable and with an URL so that a webpage is opened when users click on the model
 		plantGLTF.scene.userData.clickable = true;
-		plantGLTF.scene.userData.URL = "https://liquidstudio.nl/";
+		plantGLTF.scene.userData.URL = LSURL;
 		// Add a MindAr anchor for the first image target idx=0 and add gltf to anchor
 		const anchor = mindarThree.addAnchor(0);
 		anchor.group.add(plantGLTF.scene); // causing error
@@ -57,10 +59,43 @@ document.addEventListener("DOMContentLoaded", () => {
 			window.location.href = "../waterme.html";
 		});
 
-		document.getElementById("home-viewhistory-button").addEventListener("click", () => {
-			console.log("home view history button clicked");
+		document.getElementById("home-viewhistory-button").addEventListener("click", async() => {
 			document.getElementById("dashboard-home").classList.add("hidden");
 			document.getElementById("dashboard-viewhistory").classList.remove("hidden");
+			const records = await getWateringHistory(LambdaFunctionURLWaterMeSelect, plantId);
+			// populate the history table with the latest watering records
+			for (let i = 0; i < records.length; i++) {
+				const recordIdTag = "record" + (i+1).toString();;
+				const iconIdTag = "status" + (i+1).toString();
+				const plantStatus = records[i]["plantStatus"]["S"].toLowerCase();
+				const timestamp = transformTimestamp(records[i]["timeEpoch"]["N"]);
+				console.log("timestamp = ", timestamp);
+				// display a thumb-up or thumb-down icon corresponding to plantStatus
+				if (plantStatus === "good") {
+					const iconName = "thumb-up";
+					const img = document.getElementById(iconIdTag);
+					img.src = `../assets/images/${iconName}.png`;
+					img.classList.add("thumb-up");
+					img.classList.remove("thumb-down");
+				}
+				else if (plantStatus === "bad") {
+					const iconName = "thumb-down";
+					const img = document.getElementById(iconIdTag);
+					img.src = `../assets/images/${iconName}.png`;
+					img.classList.add("thumb-down");
+					img.classList.remove("thumb-up");
+				}
+				else {
+					console.log("plantStatus is neither Good or Bad. Unable to find correct thumb-up/-down icon");
+				}
+				// display the watering records
+				document.getElementById(recordIdTag).innerHTML = `Status ${plantStatus} @ ${timestamp}`;
+			}
+
+			// populate the timestamp for when the history table was last updated
+			const currentTimeEpoch = Math.floor(Date.now() / 1000);
+			const wateringHistoryTimestamp = transformTimestamp(currentTimeEpoch);
+			document.getElementById("watering-history-timestamp").innerHTML = `Last update: ${wateringHistoryTimestamp}`;
 		});
 
 		document.getElementById("home-aboutme-button").addEventListener("click", () => {
