@@ -7,7 +7,7 @@ const LambdaFunctionURLWaterMeInsert = "https://6dixquaejcwbhnoqcxvka4bpjm0bcaun
 // then invoke a lambda function to write a new watering record in backend database
 document.addEventListener("DOMContentLoaded", () => {
   // If button Submit is clicked, add a new watering record to backend database
-  document.getElementById("button-submit").addEventListener("click", () => {
+  document.getElementById("button-submit").addEventListener("click", async() => {
     console.log("water me button submit clicked");
     
     // Obtain epoch time when the form is submitted
@@ -20,13 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const plantStatus = checkedRadio.value;
 
     // Invoke lambda to write a new watering record to database
-    const success = insertWateringRecord(LambdaFunctionURLWaterMeInsert, plantId, timeEpoch, plantStatus);
-    if (success) {
-      alert("Success!");
-    } else {
-      alert("Failed. Try again later!");
-    }
-
+    await insertWateringRecord(LambdaFunctionURLWaterMeInsert, plantId, timeEpoch, plantStatus);
     // Return to main dashboard
     window.location.href = "./index.html";
   });
