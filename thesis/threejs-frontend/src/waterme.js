@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Invoke lambda to write a new watering record to database
     const success = insertWateringRecord(LambdaFunctionURLWaterMeInsert, plantId, timeEpoch, plantStatus);
     if (success) {
-      alert("Recorded html form: plantId = " + plantId + "; plantStatus = " + plantStatus);
+      alert("Success!");
     } else {
-      alert("Failed to record a new watering event. Try again later.");
+      alert("Failed. Try again later!");
     }
 
     // Return to main dashboard

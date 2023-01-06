@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 			// Display updated moisture data
 			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
-			document.getElementById("moisture-timestamp").innerHTML = `Last update: ${moistureTimestamp}`; 
+			document.getElementById("moisture-timestamp").innerHTML = `As of: ${moistureTimestamp}`; 
 
 			// Update water cup image depending on the moisture reading
 			if (moisturePercentage < 30) {
