@@ -102,7 +102,8 @@ void setup() {
 
   // Get offset time in seconds to adjust for local timezone
   // Netherlands is UTC-4:00 Hrs: offset = -4 * 60 * 60 = -14400
-  ntpTimeClient.setTimeOffset(-14400);   
+  // NO NEED TO OFFSET. NOT SURE WHY.
+  //ntpTimeClient.setTimeOffset(-14400);   
 }
  
 void loop() {
