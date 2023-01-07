@@ -1,12 +1,13 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="UTF-8">
 		<!-- mindar-image-three-prod.js@1.1.5 has three.js@0.136.0 as dependency -->
 		<script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.1.5/dist/mindar-image-three.prod.js"></script>
 		<!-- for hand gesture detection -->
 		<script> window.tf = window.MINDAR.IMAGE.tf; </script>
     <script src="https://unpkg.com/@tensorflow-models/handpose@0.0.6/dist/handpose.js"></script>
-		<!-- TODO: replace fingerpose with CDN script -->
+		<!-- TODO: install fingerpose using npm instead: https://github.com/andypotato/fingerpose -->
     <script src='./assets/libs/fingerpose.js'></script>
 		<!-- end -->
 		<script src="./dist/index.bundle.js" type="module"></script>
@@ -22,7 +23,7 @@
 			<div id="dashboard-header">
 				<div id="dashboard-headline">
 					<img id="headline-image" src="../assets/images/acn.png" alt="acn-logo"/>
-					<div id="headline-text">Hello from Vincent van Grow! 👋</div>
+					<div id="headline-text">Hello from Vincent van Grow! &#x1F44B; </div>
 				</div>
 			</div>
 			<div id="dashboard-footer">Powered by 
@@ -44,7 +45,7 @@
 			</div>
 			<div id="dashboard-aboutme-page1" class="hidden">
 				<div class="dashboard-title">Who am I?</div>
-				<div id="" class="dashboard-text">People also call me Swiss Cheese plant 🧀. Walk around and view me in 3D!</div>
+				<div id="" class="dashboard-text">People also call me Swiss Cheese plant &#x1F9C0;. Walk around and view me in 3D!</div>
 				<div class="dashboard-aboutme-page1-buttons">
 					<button id="aboutme-page1-back-button" class="button dashboard-aboutme-back-button">&lt; Back</button>
 					<button id="aboutme-page1-next-button" class="button">Next &gt;</button>
@@ -67,15 +68,15 @@
 			<div id="dashboard-viewhistory" class="hidden">
 				<div class="dashboard-title">When was I last watered?</div>
 				<div class="watering-record">
-					<img id="status1" class="status-icon thumb-down" src="../assets/images/thumb-down.png" alt="plant-status"/>
+					<img id="status1" class="status-icon thumb-down" src="../assets/images/thumb-down.PNG" alt="plant-status"/>
 					<div id="record1">...</div>
 				</div>
 				<div class="watering-record">
-					<img id="status2" class="status-icon thumb-up" src="../assets/images/thumb-up.png" alt="plant-status"/>
+					<img id="status2" class="status-icon thumb-up" src="../assets/images/thumb-up.PNG" alt="plant-status"/>
 					<div id="record2">...</div>
 				</div>
 				<div class="watering-record">
-					<img id="status3" class="status-icon thumb-up" src="../assets/images/thumb-up.png" alt="plant-status"/>
+					<img id="status3" class="status-icon thumb-up" src="../assets/images/thumb-up.PNG" alt="plant-status"/>
 					<div id="record3">...</div>
 				</div>
 				<div class="dashboard-viewhistory-buttons">
