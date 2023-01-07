@@ -55,7 +55,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		// Add event listeners for dashboard-home-button
 		document.getElementById("home-waterme-button").addEventListener("click", () => {
-			console.log("home water me button clicked");
 			window.location.href = "../waterme.html";
 		});
 
@@ -69,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
 				const iconIdTag = "status" + (i+1).toString();
 				const plantStatus = records[i]["plantStatus"]["S"].toLowerCase();
 				const timestamp = transformTimestamp(records[i]["timeEpoch"]["N"]);
-				console.log("timestamp = ", timestamp);
 				// display a thumb-up or thumb-down icon corresponding to plantStatus
 				if (plantStatus === "good") {
 					const iconName = "thumb-up";
@@ -105,13 +103,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 
 		document.getElementById("home-getupdates-button").addEventListener("click", async () => {
-			console.log("home get updates button clicked");
 			// Invoke lambda function url to retrieve sensor value and timestamp from dynamodb
 			const moistureData = await getMoistureData(LambdaFunctionURLSensorDataSelect, moistureSensorId);
 			const moisturePercentage = moistureData.sensorValue;
 			const moistureTimestamp = transformTimestamp(moistureData.timeEpoch);
-			console.log("moisturePercentage = ", moisturePercentage);
-			console.log("moistureTimestamp = ", moistureTimestamp);
 
 			// Display updated moisture data
 			document.getElementById("moisture-reading").innerHTML = `Soil moisture: ${moisturePercentage}%`; 
@@ -183,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
 			const raycaster = new THREE.Raycaster();
 			raycaster.setFromCamera(mouse, camera);
 			const intersects = raycaster.intersectObjects(scene.children, true);
-			console.log("intersects.length = ", intersects.length);
 			if (intersects.length > 0) {
 				let o = intersects[0].object;
 				while (o.parent && !o.userData.clickable) {

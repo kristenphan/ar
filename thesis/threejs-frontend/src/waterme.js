@@ -8,8 +8,6 @@ const LambdaFunctionURLWaterMeInsert = "https://6dixquaejcwbhnoqcxvka4bpjm0bcaun
 document.addEventListener("DOMContentLoaded", () => {
   // If button Submit is clicked, add a new watering record to backend database
   document.getElementById("button-submit").addEventListener("click", async() => {
-    console.log("water me button submit clicked");
-    
     // Obtain epoch time when the form is submitted
     const timeEpoch = Math.floor(Date.now() / 1000);
 
